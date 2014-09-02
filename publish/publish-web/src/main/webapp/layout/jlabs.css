@@ -1,0 +1,16 @@
+div.titled-div .title {
+	border-radius: 8px 8px 0px 0px;
+	border: 1px solid;
+	border-color: #888888;
+	font-color: #888888;
+	background-color: #e5e3e9;
+	padding: 10px 10px 10px 10px;
+}
+
+div.titled-div .content {
+	margin-top: -1px;
+	border-radius: 0px 0px 8px 8px;
+	border: 1px solid;
+	border-color: #888888;
+	padding: 10px 10px 10px 10px;
+}

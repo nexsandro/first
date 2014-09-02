@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory name="drivesf">
+
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/pub</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		
+		<!-- 
+		<property name="hibernate.connection.driver_class">org.h2.Driver</property>
+		<property name="hibernate.connection.url">jdbc:h2:c:/environment/database/h2/pub</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:or</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
+
+ -->
+		<property name="hibernate.default_schema">pub</property>
+		
+		<property name="hibernate.connection.username">pub</property>
+		<property name="hibernate.connection.password">x</property>
+		<property name="hibernate.show_sql">true</property>
+
+		<!-- 
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		 -->
+		 
+		<mapping class="br.com.jlabs.publish.entity.Address" />
+		<mapping class="br.com.jlabs.publish.entity.User" />
+		<mapping class="br.com.jlabs.publish.entity.Role" />
+		<mapping class="br.com.jlabs.publish.entity.Brand" />
+		<mapping class="br.com.jlabs.publish.entity.Manufacturer" />
+		<mapping class="br.com.jlabs.publish.entity.Product" />
+		<mapping class="br.com.jlabs.publish.entity.Keyword" />
+		<mapping class="br.com.jlabs.publish.entity.MarketSegment" />
+		<mapping class="br.com.jlabs.publish.entity.Company" />
+		
+	</session-factory>
+</hibernate-configuration>

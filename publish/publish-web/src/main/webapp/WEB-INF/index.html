@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html ng-app="publish">
+
+<head>
+	<script type="text/javascript" src="jquery-ui/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="jquery-ui/ui/jquery-ui.js"></script>
+
+	<link rel="stylesheet" href="jquery-ui/themes/base/jquery-ui.css" />
+
+	<script type="text/javascript">
+		var toggled = false;
+		$(document).ready(
+			function() {
+				$("input[type=submit]").click(
+					function(event) {
+						event.preventDefault();
+						alert($("select[name=opcoes]").html() + '<option>' + $("#url").prop("value") + '</option>');
+						$("select").html(
+								$("select").html() + '<option>' + $("#url").prop("value") + '</option>'
+						);
+					}
+				);
+			}
+		);
+	</script>
+</head>
+
+<body>
+	<form method="POST" action="empty" id="form1">
+		<input type="text" id="url" value="" /><br />
+		<select name="opcoes">
+			
+		</select>
+		<BR />
+		<input type="submit" value="Mudar Link 2" />
+	</form>
+	
+	<table style="border: 1px solid;">
+		<tr><td><img style="border: 1px solid;" src="jquery-ui/themes/base/images/animated-overlay.gif" /></td></tr>
+		
+	</table>
+	
+	<!-- Load Angular JS at the end of page -->
+	<script type="text/javascript" src="js/angular/1.2.9/angular.min.js"></script>
+</body>
+
+</html>

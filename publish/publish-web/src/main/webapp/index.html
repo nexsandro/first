@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css" />
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    
+    <script src="js/jstree/jquery.jstree.js"></script>
+        
+	<title>Project Drive:</title>
+
+	<style>
+      body {
+        padding-top: 60px;
+      }
+    </style>
+
+	<script type="text/javascript">
+		function get(urlData) {
+			$.ajax({
+				url : urlData,
+				type : 'GET',
+				success  : function (htmlData) {
+					$('#content').html(htmlData);
+				},
+				error : function (error) {
+					alert('Error: ' + error);
+				},
+				dataType : 'html'
+			});
+			return false;
+		}
+	</script>
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+		<ul class="nav">
+			<li><a href="javascript:get('link1.html')">Link1</a></li>
+			<li><a href="javascript:get('link2.html')">Link2</a></li>
+			<li><a href="javascript:get('link3.html')">Link3</a></li>
+		</ul>
+			</div>
+		</div>
+	</div>
+
+	<div id="content" class="container">
+
+	</div>
+</body>
+</html>

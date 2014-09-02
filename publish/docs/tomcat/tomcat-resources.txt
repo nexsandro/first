@@ -1,0 +1,20 @@
+
+	<Resource name="jdbc/DriveDS" auth="Container" type="javax.sql.DataSource"
+               maxActive="100" maxIdle="30" maxWait="10000"
+               username="access" password="access" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://localhost:3306/access"/>
+               
+	<Realm 
+	 		className="br.com.jlabs.tomcat.login.QueryDataSourceRealm"
+	 		localDataSource="true" 
+	 		resourceName="UserDatabase"
+	 		dataSourceName="jdbc/DriveDS"
+	 		rolesQuery="SELECT no_user_grup 
+				FROM tb_user_grup  ug
+				INNER JOIN tb_user_grup_user uug on ug.sq_user_grup = uug.sq_user_grup
+				INNER JOIN tb_user u on uug.sq_user = u.sq_user
+				where u.no_logn = ?"
+	 		credentialsQuery="SELECT no_pass FROM tb_user where no_logn = ?"
+	 	/>
+	 	
+	 	

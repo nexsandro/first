@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jboss-web PUBLIC "-//JBoss//DTD Web Application 2.4//EN" "http://www.jboss.org/j2ee/dtd/jboss-web_4_0.dtd">
+<!--
+	$Id: jboss-web.xml 3693 2006-01-27 15:19:59Z ro.rothganger $
+	
+	JBoss Specific Web Scope Configuration
+	
+	Language:	  		English (en-US)
+	Encode:		  		UTF-8
+	Last Modified: 		$Date: 2006-01-27 12:19:59 -0300 (sex, 27 jan 2006) $
+
+	@author Rodolfo Rothganger
+	@version $Revision: 3693 $
+-->
+<jboss-web>
+	<!-- 
+		The security-domain element allows one to specify a module wide
+		security manager domain. It specifies the JNDI name of the security
+		manager that implements the org.jboss.security.AuthenticationManager and
+		org.jboss.security.RealmMapping interfaces for the domain.
+
+		- flushOnSessionInvalidation="true|false"
+		
+			The flushOnSessionInvalidation attribute is a boolean indicating whether
+			the associated security domain cache should be flushed when the web session is
+			invalidated. If true, the security manager service 
+			flushAuthenticationCache(String, java.security.Principal) is called when the
+			session is seen to be invalid due to expiration or explicit invalidation.
+
+	<security-domain flushOnSessionInvalidation="true">${jbossSecurityDomain}</security-domain>
+	-->
+
+	<resource-ref>
+		<res-ref-name>jdbc/DriveDS</res-ref-name>
+		<jndi-name>java:jboss/jdbc/AccessDS</jndi-name>
+	</resource-ref>
+
+
+</jboss-web>

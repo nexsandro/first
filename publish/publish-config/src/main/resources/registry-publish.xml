@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/jee
+	http://www.springframework.org/schema/jee/spring-jee.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	
+	<description>Publish Spring context</description>
+
+	<!-- Configure environment properties -->
+	<context:property-placeholder location="classpath:client-config.properties" />
+
+	<!-- Enable annotation configuration -->
+    <context:annotation-config />
+
+	<!-- Configure package to lookup for annotation configuration elements -->
+	<context:component-scan 
+		base-package="br.com.jlabs.publish" />
+
+	<!-- The datasource obtained from container -->
+	<jee:jndi-lookup id="pubDataSource" jndi-name="java:comp/env/jdbc/DefaultDS"/>
+
+	<!-- Transactional wrapper around datasource -->
+	<bean id="txDataSource" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
+	     <constructor-arg ref="pubDataSource"/>
+	</bean>
+
+	<!-- Enable annotation and proxied managed transactions -->	
+	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" mode="proxy"  />
+	
+	<!-- Enable MVC annotation driven -->
+	<mvc:annotation-driven>
+        <mvc:message-converters>
+            <!-- Add HibernateAware mapper to the default stack of converters -->
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="br.com.jlabs.common.jackson.HibernateAwareObjectMapper" />
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+	<!-- Transaction manager to manage annotated transaction environment -->
+	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" >
+	    <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	    <property name="basename" value="br.com.jlabs.project.messages"/>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="txDataSource" />
+		<property name="packagesToScan">
+			<list>
+				<value>br.com.jlabs.publish.entity</value>
+			</list>
+		</property>
+	</bean> 
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes, 100MB-->
+		<property name="maxUploadSize" value="${client.maxUploadSize}" /> 
+	</bean>
+
+</beans>

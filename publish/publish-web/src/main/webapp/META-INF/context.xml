@@ -1,0 +1,43 @@
+<context>
+
+	<Resource 
+		name="jdbc/DriveDS" 
+		auth="Container" 
+		type="javax.sql.DataSource"
+        maxActive="100" 
+        maxIdle="30" 
+        maxWait="10000"
+        username="access" 
+        password="access" 
+        driverClassName="com.mysql.jdbc.Driver"
+        defaultAutoCommit="false"
+    	defaultTransactionIsolation="READ_COMMITTED"
+    	url="jdbc:mysql://localhost:3306/access"/>
+
+<!-- 
+    <Resource auth="Container" 
+    	driverClassName="oracle.jdbc.OracleDriver" 
+    	maxActive="20" 
+    	maxIdle="10" 
+    	maxWait="10000" 
+    	name="jdbc/DriveDS" 
+    	defaultAutoCommit="false"
+    	defaultTransactionIsolation="READ_COMMITTED"
+    	password="x" 
+    	type="javax.sql.DataSource" 
+    	url="jdbc:oracle:thin:@localhost:1521:or" 
+    	username="drive" /> 
+    	
+    	
+
+               
+
+	<Resource name="jdbc/DriveDS" auth="Container" type="javax.sql.DataSource"
+               maxActive="100" maxIdle="30" maxWait="10000"
+               username="sa" password="x" driverClassName="org.h2.Driver"
+               url="jdbc:h2:tcp://localhost/D:/environment/dbfiles/h2/drive" />
+
+ -->
+               
+               
+</context>

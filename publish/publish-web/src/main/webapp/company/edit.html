@@ -1,0 +1,108 @@
+
+
+<!----------------------------------
+
+ Company Edit View
+ 
+ templateUrl: company/edit.html
+ 
+ ----------------------------------->
+
+<form ng-controller="CompanyEditController" ng-submit="a = 4 * 5" id="companyForm" name="companyForm" class="form-horizontal" novalidate>
+
+<div class="panel panel-default row">
+
+	<div class="panel-heading">
+		<h3>Empresa</h3>
+	</div>
+	
+	<div class="panel-body">
+	
+		<input type="hidden" name="id" ng-model="company.id" novalidate />
+		
+		<input type="hidden" name="version" ng-model="company.version" novalidate />
+		
+		<div class="form-group col-md-12">
+			<label for="name" class="control-label col-md-2">* Nome:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">a-z</span>
+				<input type="text" id="name" name="name" class="form-control" placeholder="Nome da empresa" ng-model="company.name" novalidate required />
+			</div>
+			<div class="input-group col-md-10 col-md-offset-2">
+				<span class="label label-warning" ng-show=companyForm.name.$invalid && !companyForm.name.$pristine">Nome deve ser preenchido!</span>
+			</div>
+		</div>
+		
+		<div class="form-group col-md-12">
+			<label for="cnpj" class="control-label col-md-2">CNPJ:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">0-9</span>
+				<input type="text" id="cnpj" name="cnpj" class="form-control" placeholder="CNPJ sem pontuação" ng-model="company.cnpj" novalidate />
+			</div>
+		</div>
+		
+		<div class="form-group col-md-12">
+			<label for="address.street" class="control-label col-md-2">* Rua:</label>
+			<div class="input-group col-md-6">
+				<span class="input-group-addon">a-z</span>
+				<input type="text" id="address.street" name="address.street" class="form-control" placeholder="Rua" ng-model="company.address.street" novalidate required />
+			</div>
+
+			<label for="address.number" class="control-label col-md-2">* N&uacute;mero:</label>
+			<div class="input-group col-md-2">
+				<span class="input-group-addon">a-z</span>
+				<input type="text" id="address.number" name="address.number" class="form-control" placeholder="N&uacute;mero" ng-model="company.address.number" required novalidate />
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label for="address.street" class="control-label col-md-2">Complemento:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">a-z</span>
+				<input type="text" id="address.extra" name="address.extra" class="form-control" placeholder="Complemento" ng-model="company.address.extra" novalidate />
+			</div>
+		</div>
+		
+		<div class="form-group col-md-12">
+			<label for="address.street" class="control-label col-md-2">Cidade:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">a-z</span>
+				<input type="text" id="address.city" name="address.city" class="form-control" placeholder="Cidade" ng-model="company.address.city" novalidate />
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label for="address.number" class="control-label col-md-2">Estado:</label>
+			<div class="input-group col-md-4">
+				<span class="input-group-addon">a-z</span>
+				<input type="text" id="address.state" name="address.state" class="form-control" placeholder="Estado" maxLength="2" ng-model="company.address.state" novalidate />
+			</div>
+		
+			<label for="address.street" class="control-label col-md-2">CEP:</label>
+			<div class="input-group col-md-4">
+				<span class="input-group-addon">0-9</span>
+				<input type="text" id="address.cep" name="address.cep" class="form-control" placeholder="CEP" ng-model="company.address.cep" novalidate />
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label for="address.number" class="control-label col-md-2">Pa&iacute;s:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">a-z</span>
+				<input type="text" id="address.country" name="address.country" class="form-control" placeholder="Pa&iacute;s" ng-model="company.address.country" novalidate />
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="panel-footer">
+	
+		<button type="submit" id="submitButton" class="btn btn-primary" ng-disabled="companyForm.$invalid">Salvar</button>
+
+		<button id="backButton" class="btn btn-primary" jl-back>Voltar</button>
+
+	</div>
+
+</div>
+
+</form>
