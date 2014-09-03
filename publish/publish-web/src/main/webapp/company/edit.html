@@ -8,7 +8,7 @@
  
  ----------------------------------->
 
-<form ng-controller="CompanyEditController" ng-submit="a = 4 * 5" id="companyForm" name="companyForm" class="form-horizontal" novalidate>
+<form ng-controller="CompanyEditController as companyEditCtrl" ng-submit="companyEditCtrl.save()" id="companyForm" name="companyForm" class="form-horizontal" novalidate>
 
 <div class="panel panel-default row">
 
@@ -18,15 +18,16 @@
 	
 	<div class="panel-body">
 	
-		<input type="hidden" name="id" ng-model="company.id" novalidate />
-		
-		<input type="hidden" name="version" ng-model="company.version" novalidate />
+		<input type="hidden" name="company.id" ng-model="companyEditCtrl.company.id" novalidate />
+		<input type="hidden" name="company.version" ng-model="companyEditCtrl.company.version" novalidate />
+		<input type="hidden" name="company.address.id" ng-model="companyEditCtrl.company.address.id" novalidate />
+		<input type="hidden" name="company.address.version" ng-model="companyEditCtrl.company.address.version" novalidate />
 		
 		<div class="form-group col-md-12">
 			<label for="name" class="control-label col-md-2">* Nome:</label>
 			<div class="input-group col-md-10">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="name" name="name" class="form-control" placeholder="Nome da empresa" ng-model="company.name" novalidate required />
+				<input type="text" id="name" name="name" class="form-control" placeholder="Nome da empresa" ng-model="companyEditCtrl.company.name" novalidate required />
 			</div>
 			<div class="input-group col-md-10 col-md-offset-2">
 				<span class="label label-warning" ng-show=companyForm.name.$invalid && !companyForm.name.$pristine">Nome deve ser preenchido!</span>
@@ -37,7 +38,7 @@
 			<label for="cnpj" class="control-label col-md-2">CNPJ:</label>
 			<div class="input-group col-md-10">
 				<span class="input-group-addon">0-9</span>
-				<input type="text" id="cnpj" name="cnpj" class="form-control" placeholder="CNPJ sem pontuação" ng-model="company.cnpj" novalidate />
+				<input type="text" id="cnpj" name="cnpj" class="form-control" placeholder="CNPJ sem pontuação" ng-model="companyEditCtrl.company.cnpj" novalidate />
 			</div>
 		</div>
 		
@@ -45,13 +46,13 @@
 			<label for="address.street" class="control-label col-md-2">* Rua:</label>
 			<div class="input-group col-md-6">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="address.street" name="address.street" class="form-control" placeholder="Rua" ng-model="company.address.street" novalidate required />
+				<input type="text" id="address.street" name="address.street" class="form-control" placeholder="Rua" ng-model="companyEditCtrl.company.address.street" novalidate required />
 			</div>
 
 			<label for="address.number" class="control-label col-md-2">* N&uacute;mero:</label>
 			<div class="input-group col-md-2">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="address.number" name="address.number" class="form-control" placeholder="N&uacute;mero" ng-model="company.address.number" required novalidate />
+				<input type="text" id="address.number" name="address.number" class="form-control" placeholder="N&uacute;mero" ng-model="companyEditCtrl.company.address.number" required novalidate />
 			</div>
 		</div>
 
@@ -59,7 +60,7 @@
 			<label for="address.street" class="control-label col-md-2">Complemento:</label>
 			<div class="input-group col-md-10">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="address.extra" name="address.extra" class="form-control" placeholder="Complemento" ng-model="company.address.extra" novalidate />
+				<input type="text" id="address.extra" name="address.extra" class="form-control" placeholder="Complemento" ng-model="companyEditCtrl.company.address.extra" novalidate />
 			</div>
 		</div>
 		
@@ -67,7 +68,7 @@
 			<label for="address.street" class="control-label col-md-2">Cidade:</label>
 			<div class="input-group col-md-10">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="address.city" name="address.city" class="form-control" placeholder="Cidade" ng-model="company.address.city" novalidate />
+				<input type="text" id="address.city" name="address.city" class="form-control" placeholder="Cidade" ng-model="companyEditCtrl.company.address.city" novalidate />
 			</div>
 		</div>
 
@@ -75,13 +76,13 @@
 			<label for="address.number" class="control-label col-md-2">Estado:</label>
 			<div class="input-group col-md-4">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="address.state" name="address.state" class="form-control" placeholder="Estado" maxLength="2" ng-model="company.address.state" novalidate />
+				<input type="text" id="address.state" name="address.state" class="form-control" placeholder="Estado" maxLength="2" ng-model="companyEditCtrl.company.address.state" novalidate />
 			</div>
 		
 			<label for="address.street" class="control-label col-md-2">CEP:</label>
 			<div class="input-group col-md-4">
 				<span class="input-group-addon">0-9</span>
-				<input type="text" id="address.cep" name="address.cep" class="form-control" placeholder="CEP" ng-model="company.address.cep" novalidate />
+				<input type="text" id="address.cep" name="address.cep" class="form-control" placeholder="CEP" ng-model="companyEditCtrl.company.address.cep" novalidate />
 			</div>
 		</div>
 
@@ -89,7 +90,15 @@
 			<label for="address.number" class="control-label col-md-2">Pa&iacute;s:</label>
 			<div class="input-group col-md-10">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="address.country" name="address.country" class="form-control" placeholder="Pa&iacute;s" ng-model="company.address.country" novalidate />
+				<input type="text" id="address.country" name="address.country" class="form-control" placeholder="Pa&iacute;s" ng-model="companyEditCtrl.company.address.country" novalidate />
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label for="address.number" class="control-label col-md-2">Coment&aacute;rio:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">a-z</span>
+				<textarea id="company.comment" name="company.comment" class="form-control" rows="3" placeholder="Coment&aacute;rios sobre a empresa" ng-model="companyEditCtrl.company.comment" novalidate />
 			</div>
 		</div>
 		

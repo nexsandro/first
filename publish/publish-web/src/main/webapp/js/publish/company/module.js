@@ -32,8 +32,7 @@
 		 */
 		function addCompany(data) {
 			
-			alert('Posting ' + JSON.stringify(data));
-			var promisse = $http.post('../companies', data);  // we could add here something like $scope.httpDefaultConfig
+			var promisse = $http.post('rest/companies', data);  // we could add here something like $scope.httpDefaultConfig
 			
 			return promisse.then(handleSuccess, handleError);
 		}
@@ -105,28 +104,26 @@
 	});
 	
 	// CompanyEditController
-	app.controller('CompanyEditController', ['$scope', '$routeParams', 'companyDao', function($scope, $routeParams, companyDao) {
+	app.controller('CompanyEditController', function($scope, $routeParams, $location, companyDao) {
 
-		$scope.company = {};
-		
-		test =  function () {
-				alert('Here');
-				return 'Tested';
-		};
+		var localObj = this;
+
+		this.company = {};
 		
 		/*
 		 * Reset the identified user
 		 */
-		reset = function () {
+		this.reset = function () {
+
 			
 			if ($routeParams.id) {
 				companyDao.get($routeParams.id).then(
 					function (resultJson) {
-						$scope.company = resultJson;
+						localObj.company = resultJson;
 					}	
 				);
 			} else {
-				$scope.company = {id: null, version: null};
+				localObj.company = {id: null, version: null};
 			}
 			
 		};
@@ -134,10 +131,11 @@
 		/*
 		 * Save this company
 		 */
-		save = function () {
-			companyDao.add($scope.company).then(function() {
+		this.save = function () {
+			
+			companyDao.add(localObj.company).then(function() {
 				// success
-				$location.path('/company/list');
+				$location.path('/companies');
 			}, function(message) {
 				// error
 				alert(message);
@@ -147,9 +145,9 @@
 		/*
 		 * Start with the company
 		 */
-		reset();
+		this.reset();
 
-	}]);
+	});
 	
 	// CompanyListController
 	app.controller('CompanyListController', function(companyDao) {
@@ -160,15 +158,11 @@
 		  // List of companies
 		  this.companies = [];
 		  
-		  test = function () {
-			  alert('x');
-		  };
-		  
 		  
 		  /**
 		   * Edit the company by it's id
 		   */
-		  edit = function(companyId) {
+		  this.edit = function(companyId) {
 			  $location.path('/company/' + companyId);
 		  }
 		  

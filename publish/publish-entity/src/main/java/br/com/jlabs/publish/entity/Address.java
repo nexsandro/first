@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @javax.persistence.Entity
 @Table(name="TB_ADDR")
@@ -42,6 +43,10 @@ public class Address implements Entity {
 	
 	@Column(name="no_cep", length=8)
 	private String cep;
+	
+	@Version
+	@Column(name="nu_vers", length=10)
+	private Integer version;
 	
 	public Address() {
 		super();
@@ -159,6 +164,20 @@ public class Address implements Entity {
 		this.cep = cep;
 	}
 
+	/**
+	 * @return the version
+	 */
+	public Integer getVersion() {
+		return version;
+	}
+
+	/**
+	 * @param version the version to set
+	 */
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -189,4 +208,15 @@ public class Address implements Entity {
 			return false;
 		return true;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+    @Override
+    public String toString() {
+	    return "Address [id=" + id + ", city=" + city + ", state=" + state
+	            + ", country=" + country + ", street=" + street + ", number="
+	            + number + ", extra=" + extra + ", cep=" + cep + ", version="
+	            + version + "]";
+    }
 }

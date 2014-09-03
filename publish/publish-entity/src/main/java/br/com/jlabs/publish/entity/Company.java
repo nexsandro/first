@@ -138,7 +138,7 @@ public class Company implements Entity {
 	/**
 	 * @return the comment
 	 */
-	@Column(name="tx_comm", nullable=false)
+	@Column(name="tx_comm")
 	public String getComment() {
 		return comment;
 	}
