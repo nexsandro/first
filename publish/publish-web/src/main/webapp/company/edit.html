@@ -27,7 +27,7 @@
 			<label for="name" class="control-label col-md-2">* Nome:</label>
 			<div class="input-group col-md-10">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="name" name="name" class="form-control" placeholder="Nome da empresa" ng-model="companyEditCtrl.company.name" novalidate required />
+				<input type="text" id="name" name="name" class="form-control" placeholder="Nome da empresa" ng-model="companyEditCtrl.company.name" maxlength="255" novalidate required />
 			</div>
 			<div class="input-group col-md-10 col-md-offset-2">
 				<span class="label label-warning" ng-show=companyForm.name.$invalid && !companyForm.name.$pristine">Nome deve ser preenchido!</span>
@@ -38,7 +38,7 @@
 			<label for="cnpj" class="control-label col-md-2">CNPJ:</label>
 			<div class="input-group col-md-10">
 				<span class="input-group-addon">0-9</span>
-				<input type="text" id="cnpj" name="cnpj" class="form-control" placeholder="CNPJ sem pontuação" ng-model="companyEditCtrl.company.cnpj" novalidate />
+				<input type="text" id="cnpj" name="cnpj" class="form-control" placeholder="CNPJ sem pontuação" ng-model="companyEditCtrl.company.cnpj" maxlength="14" novalidate />
 			</div>
 		</div>
 		
@@ -46,21 +46,21 @@
 			<label for="address.street" class="control-label col-md-2">* Rua:</label>
 			<div class="input-group col-md-6">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="address.street" name="address.street" class="form-control" placeholder="Rua" ng-model="companyEditCtrl.company.address.street" novalidate required />
+				<input type="text" id="address.street" name="address.street" class="form-control" placeholder="Rua" ng-model="companyEditCtrl.company.address.street" maxlength="255" novalidate required />
 			</div>
 
 			<label for="address.number" class="control-label col-md-2">* N&uacute;mero:</label>
 			<div class="input-group col-md-2">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="address.number" name="address.number" class="form-control" placeholder="N&uacute;mero" ng-model="companyEditCtrl.company.address.number" required novalidate />
+				<input type="text" id="address.number" name="address.number" class="form-control" placeholder="N&uacute;mero" ng-model="companyEditCtrl.company.address.number" maxlength="10" required novalidate />
 			</div>
 		</div>
 
 		<div class="form-group col-md-12">
-			<label for="address.street" class="control-label col-md-2">Complemento:</label>
+			<label for="address.street" class="control-label col-md-2">Referência:</label>
 			<div class="input-group col-md-10">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="address.extra" name="address.extra" class="form-control" placeholder="Complemento" ng-model="companyEditCtrl.company.address.extra" novalidate />
+				<input type="text" id="address.extra" name="address.extra" class="form-control" placeholder="Complemento" ng-model="companyEditCtrl.company.address.extra" maxlength="600" novalidate />
 			</div>
 		</div>
 		
@@ -68,7 +68,7 @@
 			<label for="address.street" class="control-label col-md-2">Cidade:</label>
 			<div class="input-group col-md-10">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="address.city" name="address.city" class="form-control" placeholder="Cidade" ng-model="companyEditCtrl.company.address.city" novalidate />
+				<input type="text" id="address.city" name="address.city" class="form-control" placeholder="Cidade" ng-model="companyEditCtrl.company.address.city" maxlength="255" novalidate />
 			</div>
 		</div>
 
@@ -76,13 +76,13 @@
 			<label for="address.number" class="control-label col-md-2">Estado:</label>
 			<div class="input-group col-md-4">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="address.state" name="address.state" class="form-control" placeholder="Estado" maxLength="2" ng-model="companyEditCtrl.company.address.state" novalidate />
+				<input type="text" id="address.state" name="address.state" class="form-control" placeholder="Estado" maxLength="2" ng-model="companyEditCtrl.company.address.state" maxlength="2" novalidate />
 			</div>
 		
 			<label for="address.street" class="control-label col-md-2">CEP:</label>
 			<div class="input-group col-md-4">
 				<span class="input-group-addon">0-9</span>
-				<input type="text" id="address.cep" name="address.cep" class="form-control" placeholder="CEP" ng-model="companyEditCtrl.company.address.cep" novalidate />
+				<input type="text" id="address.cep" name="address.cep" class="form-control" placeholder="CEP" ng-model="companyEditCtrl.company.address.cep" maxlength="8" novalidate />
 			</div>
 		</div>
 
@@ -90,7 +90,7 @@
 			<label for="address.number" class="control-label col-md-2">Pa&iacute;s:</label>
 			<div class="input-group col-md-10">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" id="address.country" name="address.country" class="form-control" placeholder="Pa&iacute;s" ng-model="companyEditCtrl.company.address.country" novalidate />
+				<input type="text" id="address.country" name="address.country" class="form-control" placeholder="Pa&iacute;s" ng-model="companyEditCtrl.company.address.country" maxlength="255" novalidate />
 			</div>
 		</div>
 
@@ -98,7 +98,7 @@
 			<label for="address.number" class="control-label col-md-2">Coment&aacute;rio:</label>
 			<div class="input-group col-md-10">
 				<span class="input-group-addon">a-z</span>
-				<textarea id="company.comment" name="company.comment" class="form-control" rows="3" placeholder="Coment&aacute;rios sobre a empresa" ng-model="companyEditCtrl.company.comment" novalidate />
+				<textarea id="company.comment" name="company.comment" class="form-control" rows="3" placeholder="Coment&aacute;rios sobre a empresa" ng-model="companyEditCtrl.company.comment" maxlength="600" novalidate />
 			</div>
 		</div>
 		

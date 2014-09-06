@@ -30,26 +30,37 @@ public class Product implements Entity {
 	/**
 	 * Product Id.
 	 */
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="SE_PRDT")
+	@SequenceGenerator(name="SE_PRDT", allocationSize=1, initialValue=1, sequenceName="SE_PRDT")
+	@Column(name="sq_prdt", length=12)
 	private Long id;
 	
 	/**
 	 * Product Name.
 	 */
+	@Column(name="no_name", nullable=false, length=255)
 	private String name;
 	
 	/**
 	 * Product brand.
 	 */
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="sq_brnd", referencedColumnName="sq_brnd")
 	private Brand brand;
 	
 	/**
 	 * Product Manufacturer.
 	 */
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="sq_manf", referencedColumnName="sq_manf")
 	private Manufacturer manufacturer;
 	
 	/**
 	 * Product version.
 	 */
+    @Version
+    @Column(name="no_vers", nullable=false, length=12)
     private Integer version;
     
 	/**
@@ -78,10 +89,6 @@ public class Product implements Entity {
 	/**
 	 * @return the id
 	 */
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="SE_PRDT")
-	@SequenceGenerator(name="SE_PRDT", allocationSize=1, initialValue=1, sequenceName="SE_PRDT")
-	@Column(name="sq_prdt")
 	public Long getId() {
 		return id;
 	}
@@ -96,7 +103,6 @@ public class Product implements Entity {
 	/**
 	 * @return the name
 	 */
-	@Column(name="no_name", nullable=false)
 	public String getName() {
 		return name;
 	}
@@ -111,8 +117,6 @@ public class Product implements Entity {
 	/**
 	 * @return the brand
 	 */
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="sq_brnd", referencedColumnName="sq_brnd")
 	public Brand getBrand() {
 		return brand;
 	}
@@ -127,8 +131,6 @@ public class Product implements Entity {
 	/**
 	 * @return the manufacturer
 	 */
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="sq_manf", referencedColumnName="sq_manf")
 	public Manufacturer getManufacturer() {
 		return manufacturer;
 	}
@@ -143,8 +145,6 @@ public class Product implements Entity {
 	/**
 	 * @return the version
 	 */
-    @Version
-    @Column(name="no_vers", nullable=false)
 	public Integer getVersion() {
 		return version;
 	}

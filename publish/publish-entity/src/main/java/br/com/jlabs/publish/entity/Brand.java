@@ -20,16 +20,23 @@ public class Brand implements Entity {
 	/**
 	 * Brand id.
 	 */
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO, generator="SE_BRND")
+    @SequenceGenerator(name="SE_BRND", allocationSize=1, initialValue=1, sequenceName="SE_BRND")
+    @Column(name="sq_brnd", length=12)
 	private Long id;
 	
 	/**
 	 * Brand name.
 	 */
+    @Column(name="no_name", nullable=false, length=255)
 	private String name;
 	
 	/**
 	 * Brand version
 	 */
+    @Version
+    @Column(name="no_vers", nullable=false, length=12)
 	private Integer version;
 	
 	/**
@@ -54,10 +61,6 @@ public class Brand implements Entity {
 	/**
 	 * @return the id
 	 */
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO, generator="SE_BRND")
-    @SequenceGenerator(name="SE_BRND", allocationSize=1, initialValue=1, sequenceName="SE_BRND")
-    @Column(name="sq_brnd")
 	public Long getId() {
 		return id;
 	}
@@ -72,7 +75,6 @@ public class Brand implements Entity {
 	/**
 	 * @return the name
 	 */
-    @Column(name="no_name", nullable=false)
 	public String getName() {
 		return name;
 	}
@@ -87,8 +89,6 @@ public class Brand implements Entity {
 	/**
 	 * @return the version
 	 */
-    @Version
-    @Column(name="no_vers", nullable=false)
 	public Integer getVersion() {
 		return version;
 	}

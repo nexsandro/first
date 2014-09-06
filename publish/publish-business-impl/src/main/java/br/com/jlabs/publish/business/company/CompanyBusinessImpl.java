@@ -36,7 +36,7 @@ public class CompanyBusinessImpl implements CompanyBusiness {
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED)
-	public void save(Company company) throws UserException {
+	public Company save(Company company) throws UserException {
 
 		// Adjust address
 		if (company.getAddress() != null) {
@@ -52,6 +52,8 @@ public class CompanyBusinessImpl implements CompanyBusiness {
 		} else {
 			companyDao.create(company);
 		}
+		
+		return company;
 	}
 
 	/**

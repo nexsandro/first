@@ -26,16 +26,23 @@ public class MarketSegment implements Entity {
 	/**
 	 * MarketSetment id.
 	 */
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="SE_MRKT_SEGM")
+	@SequenceGenerator(name="SE_MRKT_SEGM", allocationSize=1, initialValue=1, sequenceName="SE_MRKT_SEGM")
+	@Column(name="sq_mrkt_segm", length=12)
 	private Long id;
 	
 	/**
 	 * Market Segment name.
 	 */
+	@Column(name="no_name", nullable=false, length=255)
 	private String name;
 
 	/**
 	 * Market segment version.
 	 */
+    @Version
+    @Column(name="no_vers", nullable=false, length=12)
 	private Integer version;
 	
 	/**
@@ -59,10 +66,6 @@ public class MarketSegment implements Entity {
 	/**
 	 * @return the id
 	 */
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="SE_MRKT_SEGM")
-	@SequenceGenerator(name="SE_MRKT_SEGM", allocationSize=1, initialValue=1, sequenceName="SE_MRKT_SEGM")
-	@Column(name="sq_mrkt_segm")
 	public Long getId() {
 		return id;
 	}
@@ -77,7 +80,6 @@ public class MarketSegment implements Entity {
 	/**
 	 * @return the name
 	 */
-	@Column(name="no_name", nullable=false)
 	public String getName() {
 		return name;
 	}
@@ -92,8 +94,6 @@ public class MarketSegment implements Entity {
 	/**
 	 * @return the version
 	 */
-    @Version
-    @Column(name="no_vers", nullable=false)
 	public Integer getVersion() {
 		return version;
 	}

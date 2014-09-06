@@ -15,6 +15,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+/**
+ * The company.
+ * 
+ * @author sandro
+ *
+ */
 @javax.persistence.Entity
 @Table(name="TB_COMP")
 public class Company implements Entity {
@@ -27,41 +33,60 @@ public class Company implements Entity {
 	/**
 	 * Id, key.
 	 */
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="SE_COMP")
+	@SequenceGenerator(name="SE_COMP", sequenceName="SE_COMP", allocationSize=1, initialValue=1)
+	@Column(name="sq_comp", length=12)
 	private Long id;
 	
 	/**
 	 * Name.
 	 */
+	@Column(name="no_name", length=255)
 	private String name;
 	
 	/**
 	 * CNPJ.
 	 */
+	@Column(name="no_cnpj", length=14)
 	private String cnpj;
 	
 	/**
 	 * Address.
 	 */
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="sq_addr")
 	private Address address;
 	
 	/**
 	 * Comments.
 	 */
+	@Column(name="tx_comm", length=600)
 	private String comment;
 	
 	/**
 	 * Products.
 	 */
+	@ManyToMany
+	@JoinTable(name="TB_COMP_PRDT",
+			joinColumns=@JoinColumn(name="sq_comp", referencedColumnName="sq_comp"),
+			inverseJoinColumns=@JoinColumn(name="sq_prdt", referencedColumnName="sq_prdt"))
 	private Set<Product> products;
 	
 	/**
-	 * 
+	 * Segmentos de Mercado
 	 */
+	@ManyToMany
+	@JoinTable(name="TB_COMP_MRKT_SEGM",
+		joinColumns=@JoinColumn(name="sq_comp", referencedColumnName="sq_comp"),
+		inverseJoinColumns=@JoinColumn(name="sq_mrkt_segm", referencedColumnName="sq_mrkt_segm"))
 	private Set<MarketSegment> marketSegments;
 	
 	/**
 	 * Company Version.
 	 */
+	@Version
+	@Column(name="nu_vers", length=12)
 	private Integer version;
 	
 	/**
@@ -74,10 +99,6 @@ public class Company implements Entity {
 	/**
 	 * @return the id
 	 */
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="SE_COMP")
-	@SequenceGenerator(name="SE_COMP", sequenceName="SE_COMP", allocationSize=1, initialValue=1)
-	@Column(name="sq_comp",  length=11)
 	public Long getId() {
 		return id;
 	}
@@ -92,7 +113,6 @@ public class Company implements Entity {
 	/**
 	 * @return the nameString
 	 */
-	@Column(name="no_name", length=400)
 	public String getName() {
 		return name;
 	}
@@ -107,7 +127,6 @@ public class Company implements Entity {
 	/**
 	 * @return the cnpj
 	 */
-	@Column(name="no_cnpj", length=14)
 	public String getCnpj() {
 		return cnpj;
 	}
@@ -122,8 +141,6 @@ public class Company implements Entity {
 	/**
 	 * @return the address
 	 */
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="sq_addr")
 	public Address getAddress() {
 		return address;
 	}
@@ -138,7 +155,6 @@ public class Company implements Entity {
 	/**
 	 * @return the comment
 	 */
-	@Column(name="tx_comm")
 	public String getComment() {
 		return comment;
 	}
@@ -153,10 +169,6 @@ public class Company implements Entity {
 	/**
 	 * @return the products
 	 */
-	@ManyToMany
-	@JoinTable(name="TB_COMP_PRDT",
-			joinColumns=@JoinColumn(name="sq_comp", referencedColumnName="sq_comp"),
-			inverseJoinColumns=@JoinColumn(name="sq_prdt", referencedColumnName="sq_prdt"))
 	public Set<Product> getProducts() {
 		return products;
 	}
@@ -171,10 +183,6 @@ public class Company implements Entity {
 	/**
 	 * @return the marketSegments
 	 */
-	@ManyToMany
-	@JoinTable(name="TB_COMP_MRKT_SEGM",
-		joinColumns=@JoinColumn(name="sq_comp", referencedColumnName="sq_comp"),
-		inverseJoinColumns=@JoinColumn(name="sq_mrkt_segm", referencedColumnName="sq_mrkt_segm"))
 	public Set<MarketSegment> getMarketSegments() {
 		return marketSegments;
 	}
@@ -189,8 +197,6 @@ public class Company implements Entity {
 	/**
 	 * @return the version
 	 */
-	@Version
-	@Column(name="nu_vers")
 	public Integer getVersion() {
 		return version;
 	}

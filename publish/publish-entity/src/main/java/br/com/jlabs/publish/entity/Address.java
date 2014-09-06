@@ -17,35 +17,62 @@ public class Address implements Entity {
 	 */
 	private static final long serialVersionUID = 1415460243177287335L;
 
+	/**
+	 * Address id.
+	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="SE_ADDR")
 	@SequenceGenerator(name="SE_ADDR", sequenceName="SE_ADDR", allocationSize=1, initialValue=1)
-	@Column(name="sq_addr", length=11)
+	@Column(name="sq_addr", length=12)
 	private Long id;
 	
+	/**
+	 * City.
+	 */
 	@Column(name="no_city", length=255)
 	private String city;
 	
+	/**
+	 * State.
+	 */
 	@Column(name="no_stat", length=2)
 	private String state;
 	
+	/**
+	 * Country.
+	 */
 	@Column(name="no_cntr", length=255)
 	private String country;
 	
+	/**
+	 * Street.
+	 */
 	@Column(name="no_stre", length=255)
 	private String street;
 	
+	/**
+	 * Number.
+	 */
 	@Column(name="no_numb", length=10)
 	private String number;
 	
-	@Column(name="no_extr", length=400)
+	/**
+	 * Extra information to locate the address
+	 */
+	@Column(name="no_extr", length=600)
 	private String extra;
 	
+	/**
+	 * CEP
+	 */
 	@Column(name="no_cep", length=8)
 	private String cep;
 	
+	/**
+	 * Optimistick lock control.
+	 */
 	@Version
-	@Column(name="nu_vers", length=10)
+	@Column(name="nu_vers", length=12)
 	private Integer version;
 	
 	public Address() {

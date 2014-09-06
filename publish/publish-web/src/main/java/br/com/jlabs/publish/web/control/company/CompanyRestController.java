@@ -47,9 +47,11 @@ public class CompanyRestController {
 	}
 
 	@RequestMapping(value="/companies", method=RequestMethod.POST)
-	public @ResponseBody void save(@RequestBody Company company) {
+	public @ResponseBody Company save(@RequestBody Company company) {
 		
 		companyBusiness.save(company);
+		
+		return company;
 		
 	}
 

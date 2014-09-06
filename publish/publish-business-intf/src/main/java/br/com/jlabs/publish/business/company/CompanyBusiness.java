@@ -10,7 +10,7 @@ public interface CompanyBusiness {
 
 	List<Company> list();
 
-	void save(Company company) throws UserException;
+	Company save(Company company) throws UserException;
 
 	Company findOne(String field, Serializable id, String[] joinFetch);
 

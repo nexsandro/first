@@ -133,7 +133,7 @@
 		 */
 		this.save = function () {
 			
-			companyDao.add(localObj.company).then(function() {
+			companyDao.add(localObj.company).then(function(data) {
 				// success
 				$location.path('/companies');
 			}, function(message) {
