@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.jlabs.publish.business.UserException;
-import br.com.jlabs.publish.dao.company.AddressDao;
+import br.com.jlabs.publish.dao.address.AddressDao;
 import br.com.jlabs.publish.dao.company.CompanyDao;
 import br.com.jlabs.publish.entity.Company;
 import br.com.jlabs.publish.search.company.CompanySearchFilter;
@@ -81,8 +81,8 @@ public class CompanyBusinessImpl implements CompanyBusiness {
 	 * Retrieve company by id.
 	 */
 	@Transactional(propagation=Propagation.REQUIRED)
-	public Company findOne(String keyField, Serializable key, String[] joinFetch) {
-		return companyDao.findOne(keyField, key, joinFetch);
+	public Company findOne(Serializable key, String[] joinFetch) {
+		return companyDao.findOne("id", key, joinFetch);
 	}
 	
 	/**

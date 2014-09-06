@@ -72,7 +72,7 @@ public class Address implements Entity {
 	 * Optimistick lock control.
 	 */
 	@Version
-	@Column(name="nu_vers", length=12)
+	@Column(name="nu_vers", length=10)
 	private Integer version;
 	
 	public Address() {

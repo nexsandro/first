@@ -12,7 +12,7 @@ public interface CompanyBusiness {
 
 	Company save(Company company) throws UserException;
 
-	Company findOne(String field, Serializable id, String[] joinFetch);
+	Company findOne(Serializable id, String[] joinFetch);
 
 	List<Company> search(String text);
 

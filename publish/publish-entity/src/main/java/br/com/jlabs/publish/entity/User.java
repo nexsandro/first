@@ -26,46 +26,64 @@ public class User implements Entity {
 	/**
 	 * Id, key.
 	 */
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="SE_USER")
+	@SequenceGenerator(name="SE_USER", sequenceName="SE_USER", initialValue=1, allocationSize=1)
+	@Column(name="sq_user", length=12)
 	private Long id;
 	
 	/**
 	 * Login.
 	 */
+	@Column(name="no_logn", length=255)
 	private String login;
 	
 	/**
 	 * Password.
 	 */
+	@Column(name="no_pass", length=255)
 	private String password;
 	
 	/**
 	 * Name
 	 */
+	@Column(name="no_name", length=255)
 	private String name;
 	
 	/**
 	 * Email.
 	 */
+	@Column(name="no_mail", length=255)
 	private String email;
 
 	/**
 	 * Phone.
 	 */
+	@Column(name="no_phon", length=255)
 	private String phone;
 	
 	/**
 	 * Company.
 	 */
+	@OneToOne
+	@JoinColumn(name="sq_comp", nullable=true)
 	private Company company;
 	
 	/**
 	 * Roles.
 	 */
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(
+		name="tb_user_role",
+		joinColumns={@JoinColumn(name="sq_user", referencedColumnName="sq_user")},
+		inverseJoinColumns={@JoinColumn(name="sq_role", referencedColumnName="sq_role")}
+			)
 	private Set<Role> roles;
 	
 	/**
 	 * Version
 	 */
+	@Column(name="nu_vers", length=10)
 	private String version;
 	
 	/**
@@ -89,10 +107,6 @@ public class User implements Entity {
 	/**
 	 * @return the id
 	 */
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="SE_USER")
-	@SequenceGenerator(name="SE_USER", sequenceName="SE_USER", initialValue=1, allocationSize=1)
-	@Column(name="sq_user", length=11)
 	public Long getId() {
 		return id;
 	}
@@ -107,7 +121,6 @@ public class User implements Entity {
 	/**
 	 * @return the logon
 	 */
-	@Column(name="no_logn")
 	public String getLogin() {
 		return login;
 	}
@@ -122,7 +135,6 @@ public class User implements Entity {
 	/**
 	 * @return the password
 	 */
-	@Column(name="no_pass")
 	public String getPassword() {
 		return password;
 	}
@@ -137,8 +149,6 @@ public class User implements Entity {
 	/**
 	 * @return the company
 	 */
-	@OneToOne
-	@JoinColumn(name="sq_comp", nullable=true)
 	public Company getCompany() {
 		return company;
 	}
@@ -153,7 +163,6 @@ public class User implements Entity {
 	/**
 	 * @return the name
 	 */
-	@Column(name="no_name")
 	public String getName() {
 		return name;
 	}
@@ -168,7 +177,6 @@ public class User implements Entity {
 	/**
 	 * @return the email
 	 */
-	@Column(name="no_mail")
 	public String getEmail() {
 		return email;
 	}
@@ -183,7 +191,6 @@ public class User implements Entity {
 	/**
 	 * @return the phone
 	 */
-	@Column(name="no_phon")
 	public String getPhone() {
 		return phone;
 	}
@@ -198,12 +205,6 @@ public class User implements Entity {
 	/**
 	 * @return the roles
 	 */
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(
-		name="tb_user_role",
-		joinColumns={@JoinColumn(name="sq_user", referencedColumnName="sq_user")},
-		inverseJoinColumns={@JoinColumn(name="sq_role", referencedColumnName="sq_role")}
-			)
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -218,7 +219,6 @@ public class User implements Entity {
 	/**
 	 * @return the version
 	 */
-	@Column(name="nu_vers")
 	public String getVersion() {
 		return version;
 	}

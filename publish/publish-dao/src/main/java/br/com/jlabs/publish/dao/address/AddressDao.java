@@ -1,4 +1,4 @@
-package br.com.jlabs.publish.dao.company;
+package br.com.jlabs.publish.dao.address;
 
 import br.com.jlabs.publish.dao.IGenericDao;
 import br.com.jlabs.publish.entity.Address;

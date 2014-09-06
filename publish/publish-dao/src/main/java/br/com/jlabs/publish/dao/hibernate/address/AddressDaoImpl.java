@@ -6,7 +6,7 @@ package br.com.jlabs.publish.dao.hibernate.address;
 import org.springframework.stereotype.Repository;
 
 import br.com.jlabs.publish.dao.AbstractHibernateDao;
-import br.com.jlabs.publish.dao.company.AddressDao;
+import br.com.jlabs.publish.dao.address.AddressDao;
 import br.com.jlabs.publish.entity.Address;
 
 /**

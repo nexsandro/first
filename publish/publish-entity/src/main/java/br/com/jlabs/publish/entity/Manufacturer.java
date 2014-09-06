@@ -28,16 +28,23 @@ public class Manufacturer implements Entity {
 	/**
 	 * Keyword id.
 	 */
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO, generator="SE_MANF")
+    @SequenceGenerator(name="SE_MANF", allocationSize=1, initialValue=1, sequenceName="SE_MANF")
+    @Column(name="sq_manf")
 	private Long id;
 	
 	/**
 	 * Keyword name.
 	 */
+    @Column(name="no_name", nullable=false, length=255)
 	private String name;
 	
     /**
      * Manufacturer version.
      */
+    @Version
+    @Column(name="no_vers", length=10)
     private Integer version;
 	
 	/**
@@ -62,10 +69,6 @@ public class Manufacturer implements Entity {
 	/**
 	 * @return the id
 	 */
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO, generator="SE_MANF")
-    @SequenceGenerator(name="SE_MANF", allocationSize=1, initialValue=1, sequenceName="SE_MANF")
-    @Column(name="sq_manf")
 	public Long getId() {
 		return id;
 	}
@@ -80,7 +83,6 @@ public class Manufacturer implements Entity {
 	/**
 	 * @return the name
 	 */
-    @Column(name="no_name", nullable=false)
 	public String getName() {
 		return name;
 	}
@@ -95,8 +97,6 @@ public class Manufacturer implements Entity {
 	/**
 	 * @return the version
 	 */
-    @Version
-    @Column(name="no_vers", nullable=false)
 	public Integer getVersion() {
 		return version;
 	}

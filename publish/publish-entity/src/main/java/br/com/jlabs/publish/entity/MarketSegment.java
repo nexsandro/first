@@ -42,7 +42,7 @@ public class MarketSegment implements Entity {
 	 * Market segment version.
 	 */
     @Version
-    @Column(name="no_vers", nullable=false, length=12)
+    @Column(name="no_vers", nullable=false, length=10)
 	private Integer version;
 	
 	/**

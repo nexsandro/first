@@ -9,7 +9,7 @@
 
 (function() {
 	
-  var app = angular.module('publish', ['ngRoute', 'ngAnimate', 'company']);
+  var app = angular.module('publish', ['ngRoute', 'company', 'product', 'brand', 'manufacturer']);
   
 	
   /*
@@ -23,26 +23,51 @@
   	$routeProvider.when(
   			
   			'/companies',
-  			{
-  				templateUrl: '../company/list.html',
-  					
-  				controller: 'CompanyListController',
-  				
-  				controllerAs: 'companyListCtrl'
-  			}
+  			{ templateUrl: '../company/list.html', controller: 'CompanyListController', controllerAs: 'companyListCtrl' }
   			
   	).
   	when(
   			'/company/:id',
-  			{
-  				templateUrl: '../company/edit.html'
-  			}
+  			{ templateUrl: '../company/edit.html' }
   	).
   	when(
   			'/company',
-  			{
-  				templateUrl: '../company/edit.html'
-  			}
+  			{ templateUrl: '../company/edit.html' }
+  	).when(
+  			
+  			'/products',
+  			{ templateUrl: '../product/list.html', controller: 'ProductListController', controllerAs: 'productListCtrl' }
+  	).
+  	when(
+  			'/product/:id',
+  			{ templateUrl: '../product/edit.html' }
+  	).
+  	when(
+  			'/product',
+  			{ templateUrl: '../product/edit.html' }
+  	).when(
+  			'/brands',
+  			{ templateUrl: '../brand/list.html', controller: 'BrandListController', controllerAs: 'brandListCtrl' }
+  	).
+  	when(
+  			'/brand/:id',
+  			{ templateUrl: '../brand/edit.html' }
+  	).
+  	when(
+  			'/brand',
+  			{ templateUrl: '../brand/edit.html' }
+  	).when(
+  			'/manufacturers',
+  			{ templateUrl: '../manufacturer/list.html', controller: 'ManufacturerListController', controllerAs: 'manufacturerListCtrl' }
+  			
+  	).
+  	when(
+  			'/manufacturer/:id',
+  			{ templateUrl: '../manufacturer/edit.html' }
+  	).
+  	when(
+  			'/manufacturer',
+  			{ templateUrl: '../manufacturer/edit.html' }
   	); // $routeProvider.when
 		
   }]);

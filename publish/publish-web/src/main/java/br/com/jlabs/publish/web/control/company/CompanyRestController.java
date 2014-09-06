@@ -58,7 +58,7 @@ public class CompanyRestController {
 	@RequestMapping(value="/company/{id}", method=RequestMethod.GET)
 	public @ResponseBody Company get(@PathVariable Long id) {
 
-		return companyBusiness.findOne("id", id, new String[] {"address"});
+		return companyBusiness.findOne(id, new String[] {"address"});
 		
 	}
 	

@@ -12,10 +12,7 @@
 
 	<title>Publish 1.00.00</title>
 
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/js/bootstrap/3.0.0/css/bootstrap.css" />
-
-    <script src="<%=request.getContextPath()%>/js/jquery/1.10.2/jquery.js"></script>
-    <script src="<%=request.getContextPath()%>/js/bootstrap/3.0.0/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/js/bootstrap/3.2.0/css/bootstrap.css" />
 
 	<style>
       body {
@@ -49,6 +46,9 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <b class="caret"></b></a>
 				        <ul class="dropdown-menu">
 				          <li><a href="#/companies">Empresas</a></li>
+				          <li><a href="#/products">Produtos</a></li>
+				          <li><a href="#/brands">Marcas</a></li>
+				          <li><a href="#/manufacturers">Fabricantes</a></li>
 				        </ul>
 					</li>
 					<li><a href="javascript:get('<%=request.getContextPath()%>/control/common/logout')">Logout</a></li>
@@ -68,11 +68,16 @@
 	<!-------------------------------------
 	 Load Angular JS at the end of page 
 	 -------------------------------------->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery/1.10.2/jquery.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/3.2.0/js/bootstrap.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/angular/1.2.9/angular.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/angular/1.2.9/angular-route.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/angular/1.2.9/angular-animate.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/angular-ui/ui-bootstrap-custom-tpls-0.10.0.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/publish/module.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/publish/company/module.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/publish/brand/module.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/publish/product/module.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/publish/manufacturer/module.js"></script>
 	
 </body>
 </html>

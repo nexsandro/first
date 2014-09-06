@@ -1,6 +1,6 @@
 /*-----------------------------------
 
-  Company AngularJS module
+  Manufacturer AngularJS module
   
   @author santos dot sandro at gmail dot com
   
@@ -10,20 +10,20 @@
 (function() {
 	
 	
-	// Add module company
-	var app = angular.module('company', ['ui.bootstrap']);
+	// Add module manufacturer
+	var app = angular.module('manufacturer', ['ui.bootstrap']);
 	
 	/*
-	 * Company DAO service 
+	 * Manufacturer DAO service 
 	 */
 	
-	app.service('companyDao', function($http, $q) {
+	app.service('manufacturerDao', function($http, $q) {
 
 		// Service API
 		return {
-			add: addCompany,
-			get: getCompany,
-			del: deleteCompany,
+			add: addManufacturer,
+			get: getManufacturer,
+			del: deleteManufacturer,
 			list: listCompanies,
 			search : search
 		};
@@ -31,9 +31,9 @@
 		/*
 		 * Business add method
 		 */
-		function addCompany(data) {
+		function addManufacturer(data) {
 			
-			var promisse = $http.post('rest/companies', data);  // we could add here something like $scope.httpDefaultConfig
+			var promisse = $http.post('rest/manufacturers', data);  // we could add here something like $scope.httpDefaultConfig
 			
 			return promisse.then(handleSuccess, handleError);
 		}
@@ -41,9 +41,9 @@
 		/*
 		 * Business get method
 		 */
-		function getCompany(id) {
+		function getManufacturer(id) {
 
-			var promisse = $http.get('../control/rest/company/' + id);  // we could add here something like $scope.httpDefaultConfig
+			var promisse = $http.get('../control/rest/manufacturer/' + id);  // we could add here something like $scope.httpDefaultConfig
 			
 			return promisse.then(handleSuccess, handleError);
 			
@@ -52,11 +52,11 @@
 		/*
 		 * Business delete method
 		 */
-		function deleteCompany(id) {
+		function deleteManufacturer(id) {
 
 			var promisse = $http({
 				method: 'delete',
-				url: '/rest/company/',
+				url: '/rest/manufacturer/',
 				data : {
 					id: id
 				}
@@ -71,7 +71,7 @@
 		 */
 		function listCompanies() {
 
-			var promisse = $http.get('rest/companies');  // we could add here something like $scope.httpDefaultConfig
+			var promisse = $http.get('rest/manufacturers');  // we could add here something like $scope.httpDefaultConfig
 			
 			return promisse.then(handleSuccess, handleError);
 			
@@ -115,12 +115,12 @@
 		
 	});
 	
-	// CompanyEditController
-	app.controller('CompanyEditController', function($scope, $routeParams, $location, companyDao) {
+	// ManufacturerEditController
+	app.controller('ManufacturerEditController', function($scope, $routeParams, $location, manufacturerDao) {
 
 		var localObj = this;
 
-		this.company = {};
+		this.manufacturer = {};
 		
 		/*
 		 * Reset the identified user
@@ -129,25 +129,25 @@
 
 			
 			if ($routeParams.id) {
-				companyDao.get($routeParams.id).then(
+				manufacturerDao.get($routeParams.id).then(
 					function (resultJson) {
-						localObj.company = resultJson;
+						localObj.manufacturer = resultJson;
 					}	
 				);
 			} else {
-				localObj.company = {id: null, version: null};
+				localObj.manufacturer = {id: null, version: null};
 			}
 			
 		};
 		
 		/*
-		 * Save this company
+		 * Save this manufacturer
 		 */
 		this.save = function () {
 			
-			companyDao.add(localObj.company).then(function(data) {
+			manufacturerDao.add(localObj.manufacturer).then(function(data) {
 				// success
-				$location.path('/companies');
+				$location.path('/manufacturers');
 			}, function(message) {
 				// error
 				alert(message);
@@ -160,39 +160,39 @@
 		 */
 		this.searchProducts = function (partialName) {
 			
-			return companyDao.search(partialName);
+			return manufacturerDao.search(partialName);
 			
 		};
 		
 		/*
-		 * Start with the company
+		 * Start with the manufacturer
 		 */
 		this.reset();
 
 	});
 	
-	// CompanyListController
-	app.controller('CompanyListController', function(companyDao) {
+	// ManufacturerListController
+	app.controller('ManufacturerListController', function(manufacturerDao) {
 
 		  // save this in scoped var 
-		  var companyStore = this;
+		  var manufacturerStore = this;
 		  
-		  // List of companies
-		  this.companies = [];
+		  // List of manufacturers
+		  this.manufacturers = [];
 		  
 		  
 		  /**
-		   * Edit the company by it's id
+		   * Edit the manufacturer by it's id
 		   */
-		  this.edit = function(companyId) {
-			  $location.path('/company/' + companyId);
+		  this.edit = function(manufacturerId) {
+			  $location.path('/manufacturer/' + manufacturerId);
 		  }
 		  
 		  // Load Companies
-		  companyDao.list()
+		  manufacturerDao.list()
 		  	.then(
-				function(companyList) {
-					companyStore.companies = companyList;
+				function(manufacturerList) {
+					manufacturerStore.manufacturers = manufacturerList;
 				},
 				function(errorMsg) {
 					alert(errorMsg);

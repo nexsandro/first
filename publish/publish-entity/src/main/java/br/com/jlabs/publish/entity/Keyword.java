@@ -27,16 +27,23 @@ public class Keyword implements Entity {
 	/**
 	 * Keyword id.
 	 */
-	private Long id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="SE_PRDT")
+	@SequenceGenerator(name="SE_PRDT", allocationSize=1, initialValue=1, sequenceName="SE_PRDT")
+	@Column(name="sq_prdt")
+    private Long id;
 	
 	/**
 	 * Keyword name.
 	 */
+	@Column(name="no_name", nullable=false, length=255)
 	private String name;
 	
 	/**
 	 * Keyword version.
 	 */
+    @Version
+    @Column(name="no_vers", nullable=false)
 	private Integer version;
 	
 	/**
@@ -60,10 +67,6 @@ public class Keyword implements Entity {
 	/**
 	 * @return the id
 	 */
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="SE_PRDT")
-	@SequenceGenerator(name="SE_PRDT", allocationSize=1, initialValue=1, sequenceName="SE_PRDT")
-	@Column(name="sq_prdt")
 	public Long getId() {
 		return id;
 	}
@@ -78,7 +81,6 @@ public class Keyword implements Entity {
 	/**
 	 * @return the name
 	 */
-	@Column(name="no_name", nullable=false)
 	public String getName() {
 		return name;
 	}
@@ -100,8 +102,6 @@ public class Keyword implements Entity {
 	/**
 	 * @param version the version to set
 	 */
-    @Version
-    @Column(name="no_vers", nullable=false)
 	public void setVersion(Integer version) {
 		this.version = version;
 	}

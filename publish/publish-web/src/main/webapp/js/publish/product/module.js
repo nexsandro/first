@@ -1,6 +1,6 @@
 /*-----------------------------------
 
-  Company AngularJS module
+  Product AngularJS module
   
   @author santos dot sandro at gmail dot com
   
@@ -10,30 +10,30 @@
 (function() {
 	
 	
-	// Add module company
-	var app = angular.module('company', ['ui.bootstrap']);
+	// Add module product
+	var app = angular.module('product', ['ui.bootstrap']);
 	
 	/*
-	 * Company DAO service 
+	 * Product DAO service 
 	 */
 	
-	app.service('companyDao', function($http, $q) {
+	app.service('productDao', function($http, $q) {
 
 		// Service API
 		return {
-			add: addCompany,
-			get: getCompany,
-			del: deleteCompany,
-			list: listCompanies,
+			add: addProduct,
+			get: getProduct,
+			del: deleteProduct,
+			list: listProducts,
 			search : search
 		};
 
 		/*
 		 * Business add method
 		 */
-		function addCompany(data) {
+		function addProduct(data) {
 			
-			var promisse = $http.post('rest/companies', data);  // we could add here something like $scope.httpDefaultConfig
+			var promisse = $http.post('rest/products', data);  // we could add here something like $scope.httpDefaultConfig
 			
 			return promisse.then(handleSuccess, handleError);
 		}
@@ -41,9 +41,9 @@
 		/*
 		 * Business get method
 		 */
-		function getCompany(id) {
+		function getProduct(id) {
 
-			var promisse = $http.get('../control/rest/company/' + id);  // we could add here something like $scope.httpDefaultConfig
+			var promisse = $http.get('../control/rest/product/' + id);  // we could add here something like $scope.httpDefaultConfig
 			
 			return promisse.then(handleSuccess, handleError);
 			
@@ -52,11 +52,11 @@
 		/*
 		 * Business delete method
 		 */
-		function deleteCompany(id) {
+		function deleteProduct(id) {
 
 			var promisse = $http({
 				method: 'delete',
-				url: '/rest/company/',
+				url: '/rest/product/',
 				data : {
 					id: id
 				}
@@ -69,9 +69,9 @@
 		/*
 		 * Business list method
 		 */
-		function listCompanies() {
+		function listProducts() {
 
-			var promisse = $http.get('rest/companies');  // we could add here something like $scope.httpDefaultConfig
+			var promisse = $http.get('rest/products');  // we could add here something like $scope.httpDefaultConfig
 			
 			return promisse.then(handleSuccess, handleError);
 			
@@ -115,12 +115,12 @@
 		
 	});
 	
-	// CompanyEditController
-	app.controller('CompanyEditController', function($scope, $routeParams, $location, companyDao) {
+	// ProductEditController
+	app.controller('ProductEditController', function($scope, $routeParams, $location, productDao) {
 
 		var localObj = this;
 
-		this.company = {};
+		this.product = {};
 		
 		/*
 		 * Reset the identified user
@@ -129,25 +129,25 @@
 
 			
 			if ($routeParams.id) {
-				companyDao.get($routeParams.id).then(
+				productDao.get($routeParams.id).then(
 					function (resultJson) {
-						localObj.company = resultJson;
+						localObj.product = resultJson;
 					}	
 				);
 			} else {
-				localObj.company = {id: null, version: null};
+				localObj.product = {id: null, version: null};
 			}
 			
 		};
 		
 		/*
-		 * Save this company
+		 * Save this product
 		 */
 		this.save = function () {
 			
-			companyDao.add(localObj.company).then(function(data) {
+			productDao.add(localObj.product).then(function(data) {
 				// success
-				$location.path('/companies');
+				$location.path('/products');
 			}, function(message) {
 				// error
 				alert(message);
@@ -160,39 +160,39 @@
 		 */
 		this.searchProducts = function (partialName) {
 			
-			return companyDao.search(partialName);
+			return productDao.search(partialName);
 			
 		};
 		
 		/*
-		 * Start with the company
+		 * Start with the product
 		 */
 		this.reset();
 
 	});
 	
-	// CompanyListController
-	app.controller('CompanyListController', function(companyDao) {
+	// ProductListController
+	app.controller('ProductListController', function(productDao) {
 
 		  // save this in scoped var 
-		  var companyStore = this;
+		  var productStore = this;
 		  
-		  // List of companies
-		  this.companies = [];
+		  // List of products
+		  this.products = [];
 		  
 		  
 		  /**
-		   * Edit the company by it's id
+		   * Edit the product by it's id
 		   */
-		  this.edit = function(companyId) {
-			  $location.path('/company/' + companyId);
+		  this.edit = function(productId) {
+			  $location.path('/product/' + productId);
 		  }
 		  
-		  // Load Companies
-		  companyDao.list()
+		  // Load Products
+		  productDao.list()
 		  	.then(
-				function(companyList) {
-					companyStore.companies = companyList;
+				function(productList) {
+					productStore.products = productList;
 				},
 				function(errorMsg) {
 					alert(errorMsg);
