@@ -7,14 +7,12 @@
  
  ----------------------------------->
 
-	<div class="row">
-	
-		<div class="panel panel-default col-lg-12 col-md-12 col-xs-12">
+		<div class="panel panel-default">
 
 			<!-- Title -->
 			<div class="panel-heading">
 			
-				<h3 class="panel-title">Produtos</h3>
+				<span class="panel-title">Contatos</span>
 				
 			</div>		
 
@@ -27,27 +25,19 @@
 					
 						<th>Nome</th>
 						
-						<th>Marca</th>
-						
-						<th>Fabricante</th>
-						
 						<th>
-							<a href="#/product">
+							<a href="#/contact/companyId={{contactListCtrl.company.id}}">
 								<span class="glyphicon glyphicon-plus"></span>
 							</a>
 						</th>
 						
 					</tr>
 
-					<tr ng-repeat="product in productListCtrl.products">
+					<tr ng-repeat="contact in contactListCtrl.contacts">
 					
-						<td>{{product.name}}</td>
+						<td>{{contact.name}}</td>
 
-						<td>{{product.brand.name}}</td>
-
-						<td>{{product.manufacturer.name}}</td>
-						
-						<td><a href="#/product/{{product.id}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+						<td><a href="#/contact/companyId={{contactListCtrl.company.id}}/id={{contact.id}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
 						
 					</tr>
 					
@@ -56,6 +46,3 @@
 			</div>
 
 		</div>
-	
-	</div>
-

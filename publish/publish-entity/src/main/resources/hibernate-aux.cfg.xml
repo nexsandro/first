@@ -38,6 +38,7 @@
 		<mapping class="br.com.jlabs.publish.entity.Keyword" />
 		<mapping class="br.com.jlabs.publish.entity.MarketSegment" />
 		<mapping class="br.com.jlabs.publish.entity.Company" />
+		<mapping class="br.com.jlabs.publish.entity.Contact" />
 		
 	</session-factory>
 </hibernate-configuration>

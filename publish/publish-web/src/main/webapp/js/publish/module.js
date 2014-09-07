@@ -9,14 +9,14 @@
 
 (function() {
 	
-  var app = angular.module('publish', ['ngRoute', 'company', 'product', 'brand', 'manufacturer']);
+  var app = angular.module('publish', ['ngRoute', 'company', 'product', 'brand', 'contact', 'manufacturer']);
   
 	
   /*
    * Config routes
    */
   app.config(['$routeProvider', function($routeProvider) {
-		  
+		
 	/*
 	 * Home navigation rules.
 	 */
@@ -68,6 +68,22 @@
   	when(
   			'/manufacturer',
   			{ templateUrl: '../manufacturer/edit.html' }
+  	).when(
+  			'/contacts/companyId=:companyId',
+  			{ templateUrl: '../contact/list.html', controller: 'ContactListController', controllerAs: 'contactListCtrl' }
+  			
+  	).
+  	when(
+  			'/contact/companyId=:companyId/id=:id',
+  			{ templateUrl: '../contact/edit.html' }
+  	).
+  	when(
+  			'/contact/companyId=:companyId',
+  			{ templateUrl: '../contact/edit.html' }
+  	).
+  	when(
+  			'/contact',
+  			{ templateUrl: '../contact/edit.html' }
   	); // $routeProvider.when
 		
   }]);

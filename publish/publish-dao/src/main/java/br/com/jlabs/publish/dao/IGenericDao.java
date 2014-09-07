@@ -14,7 +14,9 @@ public interface IGenericDao<T extends Serializable> {
 	List<T> findAll(String ... joinFetchs);
 
 	void create(final T entity);
-
+	
+	T load(Serializable id);
+	
 	T update(final T entity);
 
 	void delete(final T entity);

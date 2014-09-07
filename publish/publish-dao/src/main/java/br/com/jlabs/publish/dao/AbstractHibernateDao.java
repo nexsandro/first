@@ -52,6 +52,15 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 	}
 	
 	/**
+	 * Load an entity
+	 * @param id
+	 * @return
+	 */
+	public T load(Serializable id) {
+		return (T) getCurrentSession().load(clazz, id);
+	}
+	
+	/**
 	 * 
 	 * @param idField
 	 * @param idValue

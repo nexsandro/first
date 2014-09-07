@@ -164,6 +164,13 @@
 			
 		};
 		
+		this.editContacts = function() {
+			
+			$location.path('/contacts/companyId=' + localObj.company.id);
+
+		}
+
+		
 		/*
 		 * Start with the company
 		 */

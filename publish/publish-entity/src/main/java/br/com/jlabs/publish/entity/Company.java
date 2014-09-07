@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -57,6 +58,12 @@ public class Company implements Entity {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="sq_addr")
 	private Address address;
+
+	/**
+	 * Web Site
+	 */
+	@Column(name="no_site", length=255)
+	private String site;
 	
 	/**
 	 * Comments.
@@ -81,6 +88,12 @@ public class Company implements Entity {
 		joinColumns=@JoinColumn(name="sq_comp", referencedColumnName="sq_comp"),
 		inverseJoinColumns=@JoinColumn(name="sq_mrkt_segm", referencedColumnName="sq_mrkt_segm"))
 	private Set<MarketSegment> marketSegments;
+
+	/**
+	 * Company contacts
+	 */
+	@OneToMany(mappedBy="company", fetch=FetchType.LAZY)
+	private Set<Contact> contacts;
 	
 	/**
 	 * Company Version.
@@ -192,6 +205,34 @@ public class Company implements Entity {
 	 */
 	public void setMarketSegments(Set<MarketSegment> marketSegments) {
 		this.marketSegments = marketSegments;
+	}
+
+	/**
+	 * @return the site
+	 */
+	public String getSite() {
+		return site;
+	}
+
+	/**
+	 * @param site the site to set
+	 */
+	public void setSite(String site) {
+		this.site = site;
+	}
+
+	/**
+	 * @return the contacts
+	 */
+	public Set<Contact> getContacts() {
+		return contacts;
+	}
+
+	/**
+	 * @param contacts the contacts to set
+	 */
+	public void setContacts(Set<Contact> contacts) {
+		this.contacts = contacts;
 	}
 
 	/**

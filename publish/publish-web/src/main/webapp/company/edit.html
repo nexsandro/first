@@ -10,10 +10,10 @@
 
 <form ng-controller="CompanyEditController as companyEditCtrl" ng-submit="companyEditCtrl.save()" id="companyForm" name="companyForm" class="form-horizontal" novalidate>
 
-<div class="panel panel-default row">
+<div class="panel panel-default">
 
 	<div class="panel-heading">
-		<h3>Empresa</h3>
+		<span class="panel-title">Empresa</span>
 	</div>
 	
 	<div class="panel-body">
@@ -30,7 +30,7 @@
 				<input type="text" id="name" name="name" class="form-control" placeholder="Nome da empresa" ng-model="companyEditCtrl.company.name" maxlength="255" novalidate required />
 			</div>
 			<div class="input-group col-md-10 col-md-offset-2">
-				<span class="label label-warning" ng-show=companyForm.name.$invalid && !companyForm.name.$pristine">Nome deve ser preenchido!</span>
+				<span class="label label-warning" ng-show="companyForm.name.$invalid && !companyForm.name.$pristine">Nome deve ser preenchido!</span>
 			</div>
 		</div>
 		
@@ -120,7 +120,9 @@
 	
 		<button type="submit" id="submitButton" class="btn btn-primary" ng-disabled="companyForm.$invalid">Salvar</button>
 
-		<button id="backButton" class="btn btn-primary" jl-back>Voltar</button>
+		<button id="editContactsButton" type="button" class="btn btn-primary" ng-click="companyEditCtrl.editContacts()"  ng-disabled="companyEditCtrl.company.id == null">Contatos</button>
+
+		<button id="backButton" type="button" class="btn btn-primary" jl-back>Voltar</button>
 
 	</div>
 
