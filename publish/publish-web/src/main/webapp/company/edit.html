@@ -43,6 +43,22 @@
 		</div>
 		
 		<div class="form-group col-md-12">
+			<label for="site" class="control-label col-md-2">Web Site:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">www</span>
+				<input type="text" id="site" name="site" class="form-control" placeholder="Web site" ng-model="companyEditCtrl.company.site" maxlength="255" novalidate />
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label for="address.number" class="control-label col-md-2">Coment&aacute;rio:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">a-z</span>
+				<textarea id="company.comment" name="company.comment" class="form-control" rows="3" placeholder="Coment&aacute;rios sobre a empresa" ng-model="companyEditCtrl.company.comment" maxlength="600" novalidate />
+			</div>
+		</div>
+				
+		<div class="form-group col-md-12">
 			<label for="address.street" class="control-label col-md-2">* Rua:</label>
 			<div class="input-group col-md-6">
 				<span class="input-group-addon">a-z</span>
@@ -94,13 +110,6 @@
 			</div>
 		</div>
 
-		<div class="form-group col-md-12">
-			<label for="address.number" class="control-label col-md-2">Coment&aacute;rio:</label>
-			<div class="input-group col-md-10">
-				<span class="input-group-addon">a-z</span>
-				<textarea id="company.comment" name="company.comment" class="form-control" rows="3" placeholder="Coment&aacute;rios sobre a empresa" ng-model="companyEditCtrl.company.comment" maxlength="600" novalidate />
-			</div>
-		</div>
 
 <!-- 
 		<div class="form-group col-md-12">

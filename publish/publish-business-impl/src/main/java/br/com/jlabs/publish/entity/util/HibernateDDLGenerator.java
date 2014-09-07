@@ -21,8 +21,7 @@ public class HibernateDDLGenerator {
 		// hibernate.hbm2ddl.auto
 		configuration.setProperty("hibernate.dialect", dialect);
 		
-//		addPackage(configuration, "br.com.jlabs.project.entity.enumeration");
-		addPackage(configuration, "br.com.jlabs.project.entity");
+		addPackage(configuration, "br.com.jlabs.publish.entity");
 
 		SchemaExport schemaExport = new SchemaExport(configuration);
 		schemaExport.setDelimiter(";");

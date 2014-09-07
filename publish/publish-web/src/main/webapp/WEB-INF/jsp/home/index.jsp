@@ -47,11 +47,8 @@
 				        <ul class="dropdown-menu">
 				          <li><a href="#/companies">Empresas</a></li>
 				          <li><a href="#/products">Produtos</a></li>
-				          <li><a href="#/brands">Marcas</a></li>
-				          <li><a href="#/manufacturers">Fabricantes</a></li>
 				        </ul>
 					</li>
-					<li><a href="javascript:get('<%=request.getContextPath()%>/control/common/logout')">Logout</a></li>
 				</ul>
 			</div>
 		</div>	
