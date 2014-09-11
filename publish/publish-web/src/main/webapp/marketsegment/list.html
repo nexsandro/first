@@ -1,13 +1,15 @@
 
 <!----------------------------------
 
- Company List Vies
+ Market Segment View
  
- templateUrl: company/list.html
+ templateUrl: marketsegment/list.html
  
  ----------------------------------->
 		<ol class="breadcrumb">
 			<li>Empresas</li>
+			<li>Empresa</li>
+			<li>Segmentos de Mercado</li>
 		</ol>
 
 		<div class="panel panel-default">
@@ -15,7 +17,7 @@
 			<!-- Title -->
 			<div class="panel-heading">
 			
-				<span class="panel-title">Empresas</span>
+				<span class="panel-title">Segmentos de Mercado</span>
 				
 			</div>		
 
@@ -28,23 +30,19 @@
 					
 						<th>Nome</th>
 						
-						<th>CNPJ</th>
-						
 						<th class="text-right">
-							<a href="#/company">
+							<a href="#/company/{{marketSegmentListCtrl.company.id}}/marketSegment">
 								<span class="glyphicon glyphicon-plus"></span>
 							</a>
 						</th>
 						
 					</tr>
 
-					<tr ng-repeat="company in companyListCtrl.companies">
+					<tr ng-repeat="marketSegment in marketSegmentListCtrl.marketSegments">
 					
-						<td>{{company.name}}</td>
+						<td>{{marketSegment.name}}</td>
 
-						<td>{{company.cnpj}}</td>
-						
-						<td class="text-right"><a href="#/company/{{company.id}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+						<td class="text-right"><a><span class="glyphicon glyphicon-remove" ng-click="marketSegmentListCtrl.removeMarketSegment(marketSegmentListCtrl.company.id, marketSegment.id)"></span></a></td>
 						
 					</tr>
 					

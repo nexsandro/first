@@ -9,7 +9,7 @@
 
 (function() {
 	
-  var app = angular.module('publish', ['ngRoute', 'company', 'product', 'brand', 'contact', 'manufacturer']);
+  var app = angular.module('publish', ['ngRoute', 'company', 'product', 'brand', 'contact', 'manufacturer', 'marketSegment']);
   
 	
   /*
@@ -27,67 +27,106 @@
   			
   	).
   	when(
+  			
   			'/company/:id',
   			{ templateUrl: '../company/edit.html' }
+  			
   	).
   	when(
+  			
   			'/company',
   			{ templateUrl: '../company/edit.html' }
+  			
   	).when(
   			
   			'/products',
   			{ templateUrl: '../product/list.html', controller: 'ProductListController', controllerAs: 'productListCtrl' }
+  			
   	).
   	when(
+  			
   			'/product/:id',
   			{ templateUrl: '../product/edit.html' }
+  			
   	).
   	when(
+  			
   			'/product',
   			{ templateUrl: '../product/edit.html' }
+  			
   	).when(
+  			
   			'/brands',
   			{ templateUrl: '../brand/list.html', controller: 'BrandListController', controllerAs: 'brandListCtrl' }
+  			
   	).
   	when(
+  			
   			'/brand/:id',
   			{ templateUrl: '../brand/edit.html' }
+  			
   	).
   	when(
+  			
   			'/brand',
   			{ templateUrl: '../brand/edit.html' }
+  			
   	).when(
+  			
   			'/manufacturers',
   			{ templateUrl: '../manufacturer/list.html', controller: 'ManufacturerListController', controllerAs: 'manufacturerListCtrl' }
   			
   	).
   	when(
+  			
   			'/manufacturer/:id',
   			{ templateUrl: '../manufacturer/edit.html' }
+  			
   	).
   	when(
+  			
   			'/manufacturer',
   			{ templateUrl: '../manufacturer/edit.html' }
+  			
   	).when(
-  			'/contacts/companyId=:companyId',
+  	
+  			'/company/:companyId/contacts',
   			{ templateUrl: '../contact/list.html', controller: 'ContactListController', controllerAs: 'contactListCtrl' }
   			
   	).
   	when(
-  			'/contact/companyId=:companyId/id=:id',
+  			
+  			'/company/:companyId/contact/:contactId',
   			{ templateUrl: '../contact/edit.html' }
+  			
   	).
   	when(
-  			'/contact/companyId=:companyId',
+  			
+  			'/company/:companyId/contact',
   			{ templateUrl: '../contact/edit.html' }
+  			
+  	).when(
+  	
+  			'/company/:companyId/marketSegments',
+  			{ templateUrl: '../marketsegment/list.html', controller: 'MarketSegmentListController', controllerAs: 'marketSegmentListCtrl' }
+  			
   	).
   	when(
-  			'/contact',
-  			{ templateUrl: '../contact/edit.html' }
+  			
+  			'/company/:companyId/marketSegment/:marketSegmentId',
+  			{ templateUrl: '../marketsegment/edit.html' }
+  			
+  	).
+  	when(
+  			
+  			'/company/:companyId/marketSegment',
+  			{ templateUrl: '../marketsegment/edit.html' }
+  			
   	); // $routeProvider.when
 		
   }]);
 
+  
   /**
    * Create a diretive to make from button a back button.
    */

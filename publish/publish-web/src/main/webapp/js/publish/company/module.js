@@ -21,18 +21,17 @@
 
 		// Service API
 		return {
-			add: addCompany,
+			save: saveCompany,
 			get: getCompany,
 			del: deleteCompany,
-			list: listCompanies,
-			search : search
+			list: listCompanies
 		};
 
 		/*
-		 * Business add method
+		 * Business save or update method
 		 */
-		function addCompany(data) {
-			
+		function saveCompany(data) {
+
 			var promisse = $http.post('rest/companies', data);  // we could add here something like $scope.httpDefaultConfig
 			
 			return promisse.then(handleSuccess, handleError);
@@ -49,20 +48,13 @@
 			
 		}
 		
+		
 		/*
 		 * Business delete method
 		 */
-		function deleteCompany(id) {
+		function deleteCompany(companyId) {
 
-			var promisse = $http({
-				method: 'delete',
-				url: '/rest/company/',
-				data : {
-					id: id
-				}
-			});
-			
-			return promisse.then(handleSuccess, handleError);
+			return $http.delete('../control/rest/company/' + companyId);
 			
 		}
 		
@@ -72,17 +64,6 @@
 		function listCompanies() {
 
 			var promisse = $http.get('rest/companies');  // we could add here something like $scope.httpDefaultConfig
-			
-			return promisse.then(handleSuccess, handleError);
-			
-		}
-
-		/*
-		 * Search for products with partialName.
-		 */
-		function search(partialName) {
-
-			var promisse = $http.get('rest/products/name=' + partialName);  // we could add here something like $scope.httpDefaultConfig
 			
 			return promisse.then(handleSuccess, handleError);
 			
@@ -118,9 +99,11 @@
 	// CompanyEditController
 	app.controller('CompanyEditController', function($scope, $routeParams, $location, companyDao) {
 
-		var localObj = this;
+		var localContext = this;
 
 		this.company = {};
+		
+		this.editMarketSegment = {name: ''};
 		
 		/*
 		 * Reset the identified user
@@ -131,11 +114,11 @@
 			if ($routeParams.id) {
 				companyDao.get($routeParams.id).then(
 					function (resultJson) {
-						localObj.company = resultJson;
+						localContext.company = resultJson;
 					}	
 				);
 			} else {
-				localObj.company = {id: null, version: null};
+				localContext.company = {id: null, version: null};
 			}
 			
 		};
@@ -145,7 +128,7 @@
 		 */
 		this.save = function () {
 			
-			companyDao.add(localObj.company).then(function(data) {
+			companyDao.save(localContext.company).then(function(data) {
 				// success
 				$location.path('/companies');
 			}, function(message) {
@@ -153,23 +136,58 @@
 				alert(message);
 			});
 		};
-
-
+		
 		/*
-		 * Search for products.
+		 * Editar contatos
 		 */
-		this.searchProducts = function (partialName) {
+		this.editContacts = function() {
 			
-			return companyDao.search(partialName);
+			$location.path('/company/' + localContext.company.id + '/contacts');
+
+		}
+		
+		/*
+		 * Editar segmentos de mercado
+		 */
+		this.editMarketSegments = function() {
+
+			$location.path('/company/' + localContext.company.id + '/marketSegments');
+			
+		}
+
+		/**
+		 * Delete company
+		 */
+		this.deleteCompany = function() {
+
+			if( confirm('Confirma a exclusão da empresa ?') ) {
+
+				companyDao.del(localContext.company.id).then(
+						function() {
+							$location.path('/companies');
+						}, 
+						function(response) {
+							alert('Erro excluindo companhia. Exclua suas relações antes !');
+						}
+				);
+			}
 			
 		};
 		
-		this.editContacts = function() {
+		/*
+		 * Add marketSegment to the list of market segments of the company
+		 */
+		this.addMarketSegment = function (marketSegment) {
 			
-			$location.path('/contacts/companyId=' + localObj.company.id);
-
+			if (!localContext.company.marketSegments) localContext.company.marketSegments = [];
+			
+			var marketObj = marketSegment; 
+			if (!marketSegment.id) {
+				marketObj = {name: marketSegment};
+			}
+			
+			localContext.company.marketSegments.push(marketObj);
 		}
-
 		
 		/*
 		 * Start with the company

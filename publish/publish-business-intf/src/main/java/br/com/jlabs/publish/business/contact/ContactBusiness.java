@@ -17,5 +17,7 @@ public interface ContactBusiness {
 	Contact findOne(Serializable key, String ... joinFetch);
 
 	void save(Contact company);
+
+	void delete(Long id);
 	
 }

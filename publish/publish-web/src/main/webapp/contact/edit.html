@@ -7,6 +7,12 @@
  templateUrl: company/edit.html
  
  ----------------------------------->
+		<ol class="breadcrumb">
+			<li>Empresas</li>
+			<li>Empresa</li>
+			<li>Contacts</li>
+			<li>Contact</li>
+		</ol>
 
 <form ng-controller="ContactEditController as contactEditCtrl" ng-submit="contactEditCtrl.save()" id="contactForm" name="contactForm" class="form-horizontal" novalidate>
 
@@ -72,6 +78,8 @@
 	<div class="panel-footer">
 	
 		<button type="submit" id="submitButton" class="btn btn-primary" ng-disabled="contactForm.$invalid">Salvar</button>
+	
+		<button type="button" id="deleteButton" class="btn btn-primary" ng-click="contactEditCtrl.deleteContact()" ng-disabled="!contactEditCtrl.contact.id">Excluir</button>
 
 		<button id="backButton" type="button" class="btn btn-primary" jl-back>Voltar</button>
 

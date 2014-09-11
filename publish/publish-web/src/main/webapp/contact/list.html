@@ -6,6 +6,11 @@
  templateUrl: company/list.html
  
  ----------------------------------->
+		<ol class="breadcrumb">
+			<li>Empresas</li>
+			<li>Empresa</li>
+			<li>Contacts</li>
+		</ol>
 
 		<div class="panel panel-default">
 
@@ -25,8 +30,8 @@
 					
 						<th>Nome</th>
 						
-						<th>
-							<a href="#/contact/companyId={{contactListCtrl.company.id}}">
+						<th class="text-right">
+							<a href="#/company/{{contactListCtrl.company.id}}/contact">
 								<span class="glyphicon glyphicon-plus"></span>
 							</a>
 						</th>
@@ -37,7 +42,7 @@
 					
 						<td>{{contact.name}}</td>
 
-						<td><a href="#/contact/companyId={{contactListCtrl.company.id}}/id={{contact.id}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+						<td class="text-right"><a href="#/company/{{contactListCtrl.company.id}}/contact/{{contact.id}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
 						
 					</tr>
 					

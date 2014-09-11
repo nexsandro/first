@@ -141,7 +141,7 @@ public class MarketSegment implements Entity {
 	 */
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + "]";
+		return "MarketSegment [id=" + id + ", name=" + name + "]";
 	}
 	
 }

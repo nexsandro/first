@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import br.com.jlabs.publish.business.company.CompanyBusiness;
 import br.com.jlabs.publish.entity.Company;
 import br.com.jlabs.publish.entity.view.CompanyView;
+import br.com.jlabs.publish.web.control.company.dto.CompanyMarketSegment;
 
 @Controller
 @RequestMapping(value="/rest")
@@ -58,7 +59,28 @@ public class CompanyRestController {
 	@RequestMapping(value="/company/{id}", method=RequestMethod.GET)
 	public @ResponseBody Company get(@PathVariable Long id) {
 
-		return companyBusiness.findOne(id, new String[] {"address"});
+		return companyBusiness.findOne(id, "address");
+		
+	}
+	
+	@RequestMapping(value="/company/{id}", method=RequestMethod.DELETE)
+	public @ResponseBody void delete(@PathVariable Long id) {
+
+		companyBusiness.delete(id);
+		
+	}
+	
+	@RequestMapping(value="/company/{companyId}/marketSegment/{marketSegmentId}", method=RequestMethod.DELETE)
+	public @ResponseBody void removeMarketSegment(@PathVariable Long companyId, @PathVariable Long marketSegmentId) {
+
+		companyBusiness.removeMarketSegment(companyId, marketSegmentId);
+		
+	}
+	
+	@RequestMapping(value="/company/marketSegments", method=RequestMethod.POST)
+	public @ResponseBody void addMarketSegment(@RequestBody CompanyMarketSegment relation) {
+		
+		companyBusiness.addMarketSegment(relation.getCompany(), relation.getMarketSegment());
 		
 	}
 	

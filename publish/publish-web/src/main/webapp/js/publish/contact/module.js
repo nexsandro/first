@@ -51,17 +51,9 @@
 		/*
 		 * Business delete method
 		 */
-		function deleteContact(id) {
+		function deleteContact(companyId, contactId) {
 
-			var promisse = $http({
-				method: 'delete',
-				url: '/rest/contact/',
-				data : {
-					id: id
-				}
-			});
-			
-			return promisse.then(handleSuccess, handleError);
+			return $http.delete('../control/rest/contact/' + contactId);
 			
 		}
 		
@@ -70,7 +62,7 @@
 		 */
 		function listContacts(companyId) {
 
-			var promisse = $http.get('rest/contacts/company.id=' + companyId);  // we could add here something like $scope.httpDefaultConfig
+			var promisse = $http.get('rest/company/' + companyId + '/contacts');  // we could add here something like $scope.httpDefaultConfig
 			
 			return promisse.then(handleSuccess, handleError);
 			
@@ -115,8 +107,8 @@
 		this.reset = function () {
 
 			
-			if ($routeParams.id) {
-				contactDao.get($routeParams.id).then(
+			if ($routeParams.contactId) {
+				contactDao.get($routeParams.contactId).then(
 					function (resultJson) {
 						localContext.contact = resultJson;
 					}	
@@ -134,14 +126,32 @@
 			
 			contactDao.save(localContext.contact).then(function(data) {
 				// success
-				$location.path('/contacts/companyId=' + localContext.contact.company.id);
+				$location.path('/company/' + localContext.contact.company.id + '/contacts');
 			}, function(message) {
 				// error
 				alert(message);
 			});
 		};
 
+		/**
+		 * Delete contact
+		 */
+		this.deleteContact = function() {
 
+			if( confirm('Confirma a exclusão do contato ?') ) {
+
+				contactDao.del(localContext.contact.company.id, localContext.contact.id).then(
+						function() {
+							$location.path('/company/' + localContext.contact.company.id + '/contacts');
+						}, 
+						function(error) {
+							alert('Erro excluindo contato. Exclua suas relações antes !');
+						}
+				);
+			}
+			
+		};
+		
 		/*
 		 * Search for products.
 		 */

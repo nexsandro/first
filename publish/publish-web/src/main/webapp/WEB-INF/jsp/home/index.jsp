@@ -75,7 +75,8 @@
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/publish/brand/module.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/publish/product/module.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/publish/contact/module.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/publish/marketsegment/module.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/publish/manufacturer/module.js"></script>
-	
+
 </body>
 </html>

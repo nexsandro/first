@@ -7,6 +7,10 @@
  templateUrl: company/edit.html
  
  ----------------------------------->
+		<ol class="breadcrumb">
+			<li>Empresas</li>
+			<li>Empresa</li>
+		</ol>
 
 <form ng-controller="CompanyEditController as companyEditCtrl" ng-submit="companyEditCtrl.save()" id="companyForm" name="companyForm" class="form-horizontal" novalidate>
 
@@ -64,7 +68,9 @@
 				<span class="input-group-addon">a-z</span>
 				<input type="text" id="address.street" name="address.street" class="form-control" placeholder="Rua" ng-model="companyEditCtrl.company.address.street" maxlength="255" novalidate required />
 			</div>
+		</div>
 
+		<div class="form-group col-md-12">
 			<label for="address.number" class="control-label col-md-2">* N&uacute;mero:</label>
 			<div class="input-group col-md-2">
 				<span class="input-group-addon">a-z</span>
@@ -94,7 +100,9 @@
 				<span class="input-group-addon">a-z</span>
 				<input type="text" id="address.state" name="address.state" class="form-control" placeholder="Estado" maxLength="2" ng-model="companyEditCtrl.company.address.state" maxlength="2" novalidate />
 			</div>
+		</div>
 		
+		<div class="form-group col-md-12">
 			<label for="address.street" class="control-label col-md-2">CEP:</label>
 			<div class="input-group col-md-4">
 				<span class="input-group-addon">0-9</span>
@@ -110,26 +118,41 @@
 			</div>
 		</div>
 
-
 <!-- 
 		<div class="form-group col-md-12">
-			<label for="address.number" class="control-label col-md-2">Produtos:</label>
+			<label for="address.number" class="control-label col-md-2">Segmento de Mercado:</label>
 			<div class="input-group col-md-10">
 				<span class="input-group-addon">a-z</span>
-				<input type="text" ng-model="companyEditCtrl.editProduct" placeholder="Type for product search" typeahead="product as product.name for product in companyEditCtrl.searchProducts($viewValue)" typeahead-loading="loadingLocations" class="form-control">
-		    	<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+				
+				<input type="text" ng-model="companyEditCtrl.editMarketSegment" placeholder="Segmento de mercado" 
+					typeahead="marketSegment as marketSegment.name for marketSegment in companyEditCtrl.searchMarketSegments($viewValue)" 
+					typeahead-loading="loadingMarketSegments" 
+					class="form-control">
+				<span ng-click="companyEditCtrl.addMarketSegment(companyEditCtrl.editMarketSegment)" class="input-group-addon">+</span>
+		    	
 			</div>
 		</div>
-		{{companyEditCtrl.editProduct}}
  -->
 
+		<div class="form-group col-md-12">
+			<div class="input-group col-md-10 col-md-offset-2">
+				<span ng-repeat="market in companyEditCtrl.company.marketSegments" class="label label-info">
+					- {{market.name}}
+				</span>
+			</div>
+		</div>
 	</div>
+
 	
 	<div class="panel-footer">
+
+		<button type="button" id="editContactsButton" class="btn btn-primary" ng-click="companyEditCtrl.editContacts()"  ng-disabled="companyEditCtrl.company.id == null">Contatos</button>
+
+		<button type="button" id="editMarketSegmentsButton" class="btn btn-primary" ng-click="companyEditCtrl.editMarketSegments()"  ng-disabled="companyEditCtrl.company.id == null">Segmentos de Mercado</button>
 	
 		<button type="submit" id="submitButton" class="btn btn-primary" ng-disabled="companyForm.$invalid">Salvar</button>
-
-		<button id="editContactsButton" type="button" class="btn btn-primary" ng-click="companyEditCtrl.editContacts()"  ng-disabled="companyEditCtrl.company.id == null">Contatos</button>
+	
+		<button type="button" id="deleteButton" class="btn btn-primary" ng-click="companyEditCtrl.deleteCompany()" ng-disabled="!companyEditCtrl.company.id">Excluir</button>
 
 		<button id="backButton" type="button" class="btn btn-primary" jl-back>Voltar</button>
 

@@ -1,0 +1,60 @@
+
+
+<!----------------------------------
+
+ MarketSegment Edit View
+ 
+ templateUrl: marketsegment/edit.html
+ 
+ ----------------------------------->
+		<ol class="breadcrumb">
+			<li>Empresas</li>
+			<li>Empresa</li>
+			<li>Segmentos de Mercado</li>
+			<li>Segmento de Mercado</li>
+		</ol>
+
+<form ng-controller="MarketSegmentEditController as marketSegmentEditCtrl" ng-submit="marketSegmentEditCtrl.addToCompany()" id="marketSegmentForm" name="marketSegmentForm" class="form-horizontal" novalidate>
+
+<div class="panel panel-default">
+
+	<div class="panel-heading">
+		
+		<span class="panel-title">Segmento de Mercado</span>
+		
+	</div>
+	
+	<div class="panel-body">
+	
+		<input type="hidden" name="marketSegment.id" ng-model="marketSegmentEditCtrl.marketSegment.id" novalidate />
+		<input type="hidden" name="marketSegment.version" ng-model="marketSegmentEditCtrl.marketSegment.version" novalidate />
+		<input type="hidden" name="marketSegment.company.id" ng-model="marketSegmentEditCtrl.company.id" novalidate />
+		<input type="hidden" name="marketSegment.company.version" ng-model="marketSegmentEditCtrl.company.version" novalidate />
+		
+		<div class="form-group col-md-12">
+			<label for="address.number" class="control-label col-md-2">* Nome:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">a-z</span>
+				
+				<input type="text" ng-model="marketSegmentEditCtrl.marketSegment" placeholder="Segmento de mercado" 
+					typeahead="marketSegment as marketSegment.name for marketSegment in marketSegmentEditCtrl.searchMarketSegments($viewValue)" 
+					typeahead-loading="loadingMarketSegments" 
+					class="form-control"
+				/>
+		    	
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="panel-footer">
+	
+		<button type="submit" id="submitButton" class="btn btn-primary" ng-disabled="marketSegmentForm.$invalid">Adicionar</button>
+
+		<button id="backButton" type="button" class="btn btn-primary" jl-back>Voltar</button>
+
+	</div>
+
+</div>
+
+</form>

@@ -26,14 +26,14 @@
 	<div class="form-group">
 		<label for="j_username">Login:</label>
 		<div class="input-group">
-		<span class="input-group-addon">@</span>
+		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 		<input type="text" id="j_username" name="j_username" value="sandro" class="form-control" placeholder="Digite o login" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="j_password">Senha:</label>
 		<div class="input-group">
-			<span class="input-group-addon">*</span>
+			<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 			<input type="password" name="j_password" value="x" class="form-control" placeholder="Digite a senha" />
 		</div>
 	</div>

@@ -20,7 +20,7 @@ public class ContactRestController {
 	@Autowired
 	private ContactBusiness contactBusiness;
 	
-	@RequestMapping(value="/contacts/company.id={companyId}", method=RequestMethod.GET)
+	@RequestMapping(value="/company/{companyId}/contacts", method=RequestMethod.GET)
 	public @ResponseBody List<Contact> search(@PathVariable("companyId") Long companyId) {
 		
 		return contactBusiness.list(companyId);
@@ -31,6 +31,13 @@ public class ContactRestController {
 	public @ResponseBody Contact get(@PathVariable Long id) {
 
 		return contactBusiness.findOne(id, "company");
+		
+	}
+	
+	@RequestMapping(value="/contact/{id}", method=RequestMethod.DELETE)
+	public @ResponseBody void delete(@PathVariable Long id) {
+
+		contactBusiness.delete(id);
 		
 	}
 

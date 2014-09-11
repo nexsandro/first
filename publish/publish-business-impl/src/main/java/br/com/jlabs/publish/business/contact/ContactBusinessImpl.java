@@ -58,4 +58,13 @@ public class ContactBusinessImpl implements ContactBusiness {
 		}
     }
 
+	@Transactional(propagation=Propagation.REQUIRED)
+	public void delete(Long id) {
+		
+		Contact contact = contactDao.load(id);
+		
+	    contactDao.delete(contact);
+	    
+    }
+
 }
