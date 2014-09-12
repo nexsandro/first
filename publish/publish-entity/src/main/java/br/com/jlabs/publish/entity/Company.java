@@ -72,15 +72,6 @@ public class Company implements Entity {
 	private String comment;
 	
 	/**
-	 * Products.
-	 */
-	@ManyToMany
-	@JoinTable(name="TB_COMP_PRDT",
-			joinColumns=@JoinColumn(name="sq_comp", referencedColumnName="sq_comp"),
-			inverseJoinColumns=@JoinColumn(name="sq_prdt", referencedColumnName="sq_prdt"))
-	private Set<Product> products;
-	
-	/**
 	 * Segmentos de Mercado
 	 */
 	@ManyToMany
@@ -180,20 +171,6 @@ public class Company implements Entity {
 	}
 
 	/**
-	 * @return the products
-	 */
-	public Set<Product> getProducts() {
-		return products;
-	}
-
-	/**
-	 * @param products the products to set
-	 */
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
-
-	/**
 	 * @return the marketSegments
 	 */
 	public Set<MarketSegment> getMarketSegments() {
@@ -287,8 +264,8 @@ public class Company implements Entity {
     public String toString() {
 	    return "Company [id=" + id + ", name=" + name + ", cnpj=" + cnpj
 	            + ", address=" + address + ", comment=" + comment
-	            + ", products=" + products + ", marketSegments="
-	            + marketSegments + ", version=" + version + "]";
+	            + ", marketSegments=" + marketSegments 
+	            + ", version=" + version + "]";
     }
 
 }

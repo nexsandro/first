@@ -13,17 +13,13 @@
 <div class="panel panel-default row">
 
 	<div class="panel-heading">
-		<h3>Produto</h3>
+		<span class="panel-title">Produto</span>
 	</div>
 	
 	<div class="panel-body">
 	
 		<input type="hidden" name="product.id" ng-model="productEditCtrl.product.id" novalidate />
 		<input type="hidden" name="product.version" ng-model="productEditCtrl.product.version" novalidate />
-		<input type="hidden" name="product.brand.id" ng-model="productEditCtrl.product.brand.id" novalidate />
-		<input type="hidden" name="product.brand.version" ng-model="productEditCtrl.product.brand.version" novalidate />
-		<input type="hidden" name="product.manufacturer.id" ng-model="productEditCtrl.product.manufacturer.id" novalidate />
-		<input type="hidden" name="product.manufacturer.version" ng-model="productEditCtrl.product.manufacturer.version" novalidate />
 		
 		<div class="form-group col-md-12">
 			<label for="name" class="control-label col-md-2">* Nome:</label>
@@ -35,23 +31,6 @@
 				<span class="label label-warning" ng-show=productForm.name.$invalid && !productForm.name.$pristine">Nome deve ser preenchido!</span>
 			</div>
 		</div>
-		
-		<div class="form-group col-md-12">
-			<label for="cnpj" class="control-label col-md-2">Marca:</label>
-			<div class="input-group col-md-10">
-				<span class="input-group-addon">0-9</span>
-				<input type="text" id="brand.name" name="brand.name" class="form-control" placeholder="Nome da marca" ng-model="productEditCtrl.product.brand.name" maxlength="255" novalidate />
-			</div>
-		</div>
-		
-		<div class="form-group col-md-12">
-			<label for="cnpj" class="control-label col-md-2">Fabricante:</label>
-			<div class="input-group col-md-10">
-				<span class="input-group-addon">0-9</span>
-				<input type="text" id="manufacturer.name" name="manufacturer.name" class="form-control" placeholder="Nome do fabricante" ng-model="productEditCtrl.product.manufacturer.name" maxlength="255" novalidate />
-			</div>
-		</div>
-		
 
 	</div>
 	

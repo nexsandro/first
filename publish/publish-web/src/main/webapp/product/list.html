@@ -1,9 +1,9 @@
 
 <!----------------------------------
 
- Company List Vies
+ Product List View
  
- templateUrl: company/list.html
+ templateUrl: product/list.html
  
  ----------------------------------->
 
@@ -27,11 +27,7 @@
 					
 						<th>Nome</th>
 						
-						<th>Marca</th>
-						
-						<th>Fabricante</th>
-						
-						<th>
+						<th class="text-right">
 							<a href="#/product">
 								<span class="glyphicon glyphicon-plus"></span>
 							</a>
@@ -43,11 +39,7 @@
 					
 						<td>{{product.name}}</td>
 
-						<td>{{product.brand.name}}</td>
-
-						<td>{{product.manufacturer.name}}</td>
-						
-						<td><a href="#/product/{{product.id}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+						<td class="text-right"><a><span class="glyphicon glyphicon-remove" ng-click="productListCtrl.deleteProduct(product.id)"></span></a></td>
 						
 					</tr>
 					

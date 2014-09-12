@@ -23,9 +23,9 @@
 		<property name="hibernate.connection.password">x</property>
 		<property name="hibernate.show_sql">true</property>
 
-		<!-- 
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		
+		<!-- 
 		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
 		 -->
 		 
@@ -38,6 +38,7 @@
 		<mapping class="br.com.jlabs.publish.entity.Keyword" />
 		<mapping class="br.com.jlabs.publish.entity.MarketSegment" />
 		<mapping class="br.com.jlabs.publish.entity.Company" />
+		<mapping class="br.com.jlabs.publish.entity.CompanyNegotiate" />
 		<mapping class="br.com.jlabs.publish.entity.Contact" />
 		
 	</session-factory>

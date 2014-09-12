@@ -23,5 +23,7 @@ public interface ProductBusiness {
 	Product findOne(Long id);
 	
 	Product findOne(Serializable key, String[] joinFetch);
+
+	void delete(Long productId);
 	
 }

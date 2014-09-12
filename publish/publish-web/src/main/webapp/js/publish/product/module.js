@@ -21,7 +21,7 @@
 
 		// Service API
 		return {
-			add: addProduct,
+			save: saveProduct,
 			get: getProduct,
 			del: deleteProduct,
 			list: listProducts,
@@ -31,7 +31,7 @@
 		/*
 		 * Business add method
 		 */
-		function addProduct(data) {
+		function saveProduct(data) {
 			
 			var promisse = $http.post('rest/products', data);  // we could add here something like $scope.httpDefaultConfig
 			
@@ -48,23 +48,16 @@
 			return promisse.then(handleSuccess, handleError);
 			
 		}
-		
-		/*
-		 * Business delete method
-		 */
-		function deleteProduct(id) {
 
-			var promisse = $http({
-				method: 'delete',
-				url: '/rest/product/',
-				data : {
-					id: id
-				}
-			});
-			
-			return promisse.then(handleSuccess, handleError);
-			
-		}
+		  /**
+		   * Delete product
+		   */
+		 function deleteProduct(productId) {
+
+				return $http.delete('../control/rest/product/' + productId);
+				
+		  };
+		  
 		
 		/*
 		 * Business list method
@@ -145,7 +138,7 @@
 		 */
 		this.save = function () {
 			
-			productDao.add(localObj.product).then(function(data) {
+			productDao.save(localObj.product).then(function(data) {
 				// success
 				$location.path('/products');
 			}, function(message) {
@@ -175,11 +168,27 @@
 	app.controller('ProductListController', function(productDao) {
 
 		  // save this in scoped var 
-		  var productStore = this;
+		  var localContext = this;
 		  
 		  // List of products
 		  this.products = [];
 		  
+		  /*
+		   * Reset 
+		   */
+		  this.reset = function() {
+			  // Load Products
+			  productDao.list()
+			  	.then(
+					function(productList) {
+						localContext.products = productList;
+					},
+					function(errorMsg) {
+						alert(errorMsg);
+					}
+			  );
+			  
+		  };
 		  
 		  /**
 		   * Edit the product by it's id
@@ -187,18 +196,26 @@
 		  this.edit = function(productId) {
 			  $location.path('/product/' + productId);
 		  }
-		  
-		  // Load Products
-		  productDao.list()
-		  	.then(
-				function(productList) {
-					productStore.products = productList;
-				},
-				function(errorMsg) {
-					alert(errorMsg);
-				}
-		  );
 
+		  /**
+		   * Delete product
+		   */
+		  this.deleteProduct = function(productId) {
+
+			  if( confirm('Confirma a exclusão do produto ?') ) {
+				
+				  productDao.del(productId).then(
+			          function() {
+			        	  localContext.reset();
+				      }, 
+					  function(response) {
+						  alert('Erro excluindo produto. Exclua suas relações antes !');
+					  });
+			  }
+				
+		  };
+
+		  this.reset();
 	  });
 
 	

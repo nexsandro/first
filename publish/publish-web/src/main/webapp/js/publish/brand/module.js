@@ -21,17 +21,17 @@
 
 		// Service API
 		return {
-			add: addBrand,
+			save: saveBrand,
 			get: getBrand,
 			del: deleteBrand,
-			list: listCompanies,
+			list: listBrands,
 			search : search
 		};
 
 		/*
 		 * Business add method
 		 */
-		function addBrand(data) {
+		function saveBrand(data) {
 			
 			var promisse = $http.post('rest/brands', data);  // we could add here something like $scope.httpDefaultConfig
 			
@@ -52,24 +52,16 @@
 		/*
 		 * Business delete method
 		 */
-		function deleteBrand(id) {
+		function deleteBrand(brandId) {
 
-			var promisse = $http({
-				method: 'delete',
-				url: '/rest/brand/',
-				data : {
-					id: id
-				}
-			});
-			
-			return promisse.then(handleSuccess, handleError);
+			return $http.delete('../control/rest/brand/' + brandId);
 			
 		}
 		
 		/*
 		 * Business list method
 		 */
-		function listCompanies() {
+		function listBrands() {
 
 			var promisse = $http.get('rest/brands');  // we could add here something like $scope.httpDefaultConfig
 			
@@ -118,7 +110,7 @@
 	// BrandEditController
 	app.controller('BrandEditController', function($scope, $routeParams, $location, brandDao) {
 
-		var localObj = this;
+		var localContext = this;
 
 		this.brand = {};
 		
@@ -126,16 +118,15 @@
 		 * Reset the identified user
 		 */
 		this.reset = function () {
-
 			
 			if ($routeParams.id) {
 				brandDao.get($routeParams.id).then(
 					function (resultJson) {
-						localObj.brand = resultJson;
+						localContext.brand = resultJson;
 					}	
 				);
 			} else {
-				localObj.brand = {id: null, version: null};
+				localContext.brand = {id: null, version: null, name: ''};
 			}
 			
 		};
@@ -145,7 +136,7 @@
 		 */
 		this.save = function () {
 			
-			brandDao.add(localObj.brand).then(function(data) {
+			brandDao.save(localContext.brand).then(function(data) {
 				// success
 				$location.path('/brands');
 			}, function(message) {
@@ -153,7 +144,6 @@
 				alert(message);
 			});
 		};
-
 
 		/*
 		 * Search for products.
@@ -172,14 +162,30 @@
 	});
 	
 	// BrandListController
-	app.controller('BrandListController', function(brandDao) {
+	app.controller('BrandListController', function($location, brandDao) {
 
 		  // save this in scoped var 
-		  var brandStore = this;
+		  var localContext = this;
 		  
 		  // List of brands
 		  this.brands = [];
-		  
+
+		  /*
+		   * Reset the list
+		   */
+		  this.reset = function() {
+				
+			  // Load Companies
+			  brandDao.list()
+			  	.then(
+					function(brandList) {
+						localContext.brands = brandList;
+					},
+					function(errorMsg) {
+						alert(errorMsg);
+					}
+			  );
+		  };
 		  
 		  /**
 		   * Edit the brand by it's id
@@ -187,18 +193,27 @@
 		  this.edit = function(brandId) {
 			  $location.path('/brand/' + brandId);
 		  }
-		  
-		  // Load Companies
-		  brandDao.list()
-		  	.then(
-				function(brandList) {
-					brandStore.brands = brandList;
-				},
-				function(errorMsg) {
-					alert(errorMsg);
-				}
-		  );
 
+		  /**
+		   * Delete brand
+		   */
+		  this.deleteBrand = function(brandId) {
+
+			  if( confirm('Confirma a exclusão da marca ?') ) {
+				
+				  brandDao.del(brandId).then(
+			          function() {
+			        	  localContext.reset();
+				      }, 
+					  function(response) {
+						  alert('Erro excluindo marca. Exclua suas relações antes !');
+					  });
+			  }
+				
+		  };
+
+		  this.reset();
+		  
 	  });
 
 	

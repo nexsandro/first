@@ -47,6 +47,7 @@
 				        <ul class="dropdown-menu">
 				          <li><a href="#/companies">Empresas</a></li>
 				          <li><a href="#/products">Produtos</a></li>
+				          <li><a href="#/brands">Marcas</a></li>
 				        </ul>
 					</li>
 				</ul>

@@ -4,12 +4,9 @@
 package br.com.jlabs.publish.entity;
 
 import javax.persistence.Column;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -19,7 +16,7 @@ import javax.persistence.Version;
  *
  */
 @javax.persistence.Entity
-@Table(name="TB_PRDT")
+@Table(name="TB_PROD")
 public class Product implements Entity {
 
 	/**
@@ -31,9 +28,9 @@ public class Product implements Entity {
 	 * Product Id.
 	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="SE_PRDT")
-	@SequenceGenerator(name="SE_PRDT", allocationSize=1, initialValue=1, sequenceName="SE_PRDT")
-	@Column(name="sq_prdt", length=12)
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="SE_PROD")
+	@SequenceGenerator(name="SE_PROD", allocationSize=1, initialValue=1, sequenceName="SE_PROD")
+	@Column(name="sq_prod", length=12)
 	private Long id;
 	
 	/**
@@ -41,20 +38,6 @@ public class Product implements Entity {
 	 */
 	@Column(name="no_name", nullable=false, length=255)
 	private String name;
-	
-	/**
-	 * Product brand.
-	 */
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="sq_brnd", referencedColumnName="sq_brnd")
-	private Brand brand;
-	
-	/**
-	 * Product Manufacturer.
-	 */
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="sq_manf", referencedColumnName="sq_manf")
-	private Manufacturer manufacturer;
 	
 	/**
 	 * Product version.
@@ -68,22 +51,6 @@ public class Product implements Entity {
 	 */
 	public Product() {
 	    super();
-    }
-
-	/**
-	 * Constructor with fields.
-	 * @param id id
-	 * @param name name
-	 * @param brand brand
-	 * @param manufacturer manufacturer
-	 */
-	public Product(Long id, String name, Brand brand, Manufacturer manufacturer, Integer version) {
-	    super();
-	    this.id = id;
-	    this.name = name;
-	    this.brand = brand;
-	    this.manufacturer = manufacturer;
-		this.version = version;
     }
 
 	/**
@@ -112,34 +79,6 @@ public class Product implements Entity {
 	 */
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	/**
-	 * @return the brand
-	 */
-	public Brand getBrand() {
-		return brand;
-	}
-
-	/**
-	 * @param brand the brand to set
-	 */
-	public void setBrand(Brand brand) {
-		this.brand = brand;
-	}
-
-	/**
-	 * @return the manufacturer
-	 */
-	public Manufacturer getManufacturer() {
-		return manufacturer;
-	}
-
-	/**
-	 * @param manufacturer the manufacturer to set
-	 */
-	public void setManufacturer(Manufacturer manufacturer) {
-		this.manufacturer = manufacturer;
 	}
 
 	/**
@@ -192,8 +131,7 @@ public class Product implements Entity {
 	 */
     @Override
     public String toString() {
-	    return "Product [id=" + id + ", name=" + name + ", brand=" + brand
-	            + ", manufacturer=" + manufacturer + "]";
+	    return "Product [id=" + id + ", name=" + name + "]";
     }
 
 }

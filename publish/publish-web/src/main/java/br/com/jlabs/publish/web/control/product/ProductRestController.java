@@ -32,6 +32,13 @@ public class ProductRestController {
 		
 		return productBusiness.search(partialName);
 	}
+	
+	@RequestMapping(value="/product/{productId}", method=RequestMethod.DELETE)
+	public @ResponseBody void delete(@PathVariable Long productId) {
+
+		productBusiness.delete(productId);
+		
+	}
 
 	@RequestMapping(value="/products", method=RequestMethod.POST)
 	public @ResponseBody Product save(@RequestBody Product product) {
