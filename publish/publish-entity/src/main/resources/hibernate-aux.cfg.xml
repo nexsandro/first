@@ -39,6 +39,7 @@
 		<mapping class="br.com.jlabs.publish.entity.MarketSegment" />
 		<mapping class="br.com.jlabs.publish.entity.Company" />
 		<mapping class="br.com.jlabs.publish.entity.CompanyNegotiate" />
+		<mapping class="br.com.jlabs.publish.entity.Model" />
 		<mapping class="br.com.jlabs.publish.entity.Contact" />
 		
 	</session-factory>

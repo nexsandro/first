@@ -1,0 +1,90 @@
+
+
+<!----------------------------------
+
+ Contact Edit View
+ 
+ templateUrl: company/edit.html
+ 
+ ----------------------------------->
+		<ol class="breadcrumb">
+			<li>Empresas</li>
+			<li>Empresa</li>
+			<li>Negotiations</li>
+			<li>Negotiation</li>
+		</ol>
+
+<form ng-controller="NegotiationEditController as negotiationEditCtrl" ng-submit="negotiationEditCtrl.save()" id="negotiationForm" name="negotiationForm" class="form-horizontal" novalidate>
+
+<div class="panel panel-default">
+
+	<div class="panel-heading">
+		
+		<span class="panel-title">Companhia Negocia</span>
+		
+	</div>
+	
+	<div class="panel-body">
+	
+		<input type="hidden" name="contact.id" ng-model="negotiationEditCtrl.contact.id" novalidate />
+		<input type="hidden" name="contact.version" ng-model="negotiationEditCtrl.contact.version" novalidate />
+		<input type="hidden" name="contact.company.id" ng-model="negotiationEditCtrl.contact.company.id" novalidate />
+		
+		<div class="form-group col-md-12">
+			<label for="name" class="control-label col-md-2">* Nome:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">a-z</span>
+				<input type="text" id="name" name="name" class="form-control" placeholder="Nome do contato" ng-model="contactEditCtrl.contact.name" maxlength="255" novalidate required />
+			</div>
+			<div class="input-group col-md-10 col-md-offset-2">
+				<span class="label label-warning" ng-show="contactForm.name.$invalid && !contactForm.name.$pristine">Nome do contato deve ser preenchido!</span>
+			</div>
+		</div>
+		
+		<div class="form-group col-md-12">
+			<label for="name" class="control-label col-md-2">Telefone Celular:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">#</span>
+				<input type="text" id="fone1" name="fone1" class="form-control" placeholder="N&uacute;mero do telefone celular" ng-model="contactEditCtrl.contact.fone1" maxlength="12" novalidate />
+			</div>
+		</div>
+		
+		<div class="form-group col-md-12">
+			<label for="name" class="control-label col-md-2">Telefone Comercial:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">#</span>
+				<input type="text" id="fone2" name="fone2" class="form-control" placeholder="N&uacute;mero do telefone comercial" ng-model="contactEditCtrl.contact.fone2" maxlength="12" novalidate />
+			</div>
+		</div>
+		
+		<div class="form-group col-md-12">
+			<label for="name" class="control-label col-md-2">Email pessoal:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">@</span>
+				<input type="email" id="email1" name="email1" class="form-control" placeholder="Email Pessoal" ng-model="contactEditCtrl.contact.email1" maxlength="255" novalidate />
+			</div>
+		</div>
+		
+		<div class="form-group col-md-12">
+			<label for="name" class="control-label col-md-2">Email comercial:</label>
+			<div class="input-group col-md-10">
+				<span class="input-group-addon">@</span>
+				<input type="email" id="email2" name="email2" class="form-control" placeholder="Email comercial" ng-model="contactEditCtrl.contact.email2" maxlength="255" novalidate />
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="panel-footer">
+	
+		<button type="submit" id="submitButton" class="btn btn-primary" ng-disabled="contactForm.$invalid">Salvar</button>
+	
+		<button type="button" id="deleteButton" class="btn btn-primary" ng-click="contactEditCtrl.deleteContact()" ng-disabled="!contactEditCtrl.contact.id">Excluir</button>
+
+		<button id="backButton" type="button" class="btn btn-primary" jl-back>Voltar</button>
+
+	</div>
+
+</div>
+
+</form>

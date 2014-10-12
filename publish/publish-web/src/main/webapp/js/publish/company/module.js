@@ -154,6 +154,15 @@
 			$location.path('/company/' + localContext.company.id + '/marketSegments');
 			
 		}
+		
+		/*
+		 * Editar produtos negociados
+		 */
+		this.editNegotiationss = function() {
+
+			$location.path('/company/' + localContext.company.id + '/negotiations');
+			
+		}
 
 		/**
 		 * Delete company

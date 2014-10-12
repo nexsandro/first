@@ -85,6 +85,12 @@ public class Company implements Entity {
 	 */
 	@OneToMany(mappedBy="company", fetch=FetchType.LAZY)
 	private Set<Contact> contacts;
+
+	/**
+	 * Company contacts
+	 */
+	@OneToMany(mappedBy="company", fetch=FetchType.LAZY)
+	private Set<CompanyNegotiate> negotiations;
 	
 	/**
 	 * Company Version.
@@ -210,6 +216,20 @@ public class Company implements Entity {
 	 */
 	public void setContacts(Set<Contact> contacts) {
 		this.contacts = contacts;
+	}
+
+	/**
+	 * @return the negotiations
+	 */
+	public Set<CompanyNegotiate> getNegotiations() {
+		return negotiations;
+	}
+
+	/**
+	 * @param negotiations the negotiations to set
+	 */
+	public void setNegotiations(Set<CompanyNegotiate> negotiations) {
+		this.negotiations = negotiations;
 	}
 
 	/**

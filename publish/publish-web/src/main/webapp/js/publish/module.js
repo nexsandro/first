@@ -9,7 +9,7 @@
 
 (function() {
 	
-  var app = angular.module('publish', ['ngRoute', 'company', 'product', 'brand', 'contact', 'manufacturer', 'marketSegment']);
+  var app = angular.module('publish', ['ngRoute', 'company', 'product', 'brand', 'contact', 'manufacturer', 'marketSegment', 'negotiation']);
   
 	
   /*
@@ -87,6 +87,11 @@
   			
   			'/manufacturer',
   			{ templateUrl: '../manufacturer/edit.html' }
+  			
+  	).when(
+  	
+  			'/company/:companyId/negotiations',
+  			{ templateUrl: '../negotiation/list.html', controller: 'NegotiationListController', controllerAs: 'negotiationListCtrl' }
   			
   	).when(
   	

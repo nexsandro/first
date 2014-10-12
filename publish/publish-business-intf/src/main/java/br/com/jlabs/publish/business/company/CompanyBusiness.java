@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.jlabs.publish.business.UserException;
 import br.com.jlabs.publish.entity.Company;
+import br.com.jlabs.publish.entity.CompanyNegotiate;
 import br.com.jlabs.publish.entity.MarketSegment;
 
 public interface CompanyBusiness {
@@ -22,5 +23,7 @@ public interface CompanyBusiness {
 	void addMarketSegment(Company company, MarketSegment marketSegment);
 
 	void removeMarketSegment(Serializable companyId, Serializable marketSegmentId);
+	
+	List<CompanyNegotiate> listNegotiations(Serializable companyId);
 	
 }

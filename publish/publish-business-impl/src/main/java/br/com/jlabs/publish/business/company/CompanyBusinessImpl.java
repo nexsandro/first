@@ -13,6 +13,7 @@ import br.com.jlabs.publish.dao.address.AddressDao;
 import br.com.jlabs.publish.dao.company.CompanyDao;
 import br.com.jlabs.publish.dao.marketsegment.MarketSegmentDao;
 import br.com.jlabs.publish.entity.Company;
+import br.com.jlabs.publish.entity.CompanyNegotiate;
 import br.com.jlabs.publish.entity.MarketSegment;
 import br.com.jlabs.publish.search.company.CompanySearchFilter;
 
@@ -135,6 +136,11 @@ public class CompanyBusinessImpl implements CompanyBusiness {
 	    
 		company.getMarketSegments().remove(marketSegment);
 		
+    }
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	public List<CompanyNegotiate> listNegotiations(Serializable companyId) {
+	    return companyDao.listNegotiations(companyId);
     }
 	
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.jlabs.publish.business.company.CompanyBusiness;
 import br.com.jlabs.publish.entity.Company;
+import br.com.jlabs.publish.entity.CompanyNegotiate;
 import br.com.jlabs.publish.entity.view.CompanyView;
 import br.com.jlabs.publish.web.control.company.dto.CompanyMarketSegment;
 
@@ -46,7 +47,14 @@ public class CompanyRestController {
 		return companyBusiness.list();
 		
 	}
-
+	
+	@RequestMapping(value="/company/{companyId}/negotiations", method=RequestMethod.GET)
+	public @ResponseBody List<CompanyNegotiate> listCompanyNegotiations(@PathVariable Long companyId) {
+		
+		return companyBusiness.listNegotiations(companyId);
+		
+	}
+	
 	@RequestMapping(value="/companies", method=RequestMethod.POST)
 	public @ResponseBody Company save(@RequestBody Company company) {
 		

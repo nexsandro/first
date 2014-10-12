@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  * @author sandro
@@ -38,6 +39,20 @@ public class CompanyNegotiate implements Entity {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="sq_brnd", referencedColumnName="sq_brnd")
 	private Brand brand;
+
+	/**
+	 * Product model.
+	 */
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="sq_modl", referencedColumnName="sq_modl")
+	private Model model;
+
+	/**
+	 * Company who negotiates.
+	 */
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="sq_comp", referencedColumnName="sq_comp")
+	private Company company;
 	
 	/**
 	 * Products.
@@ -46,11 +61,18 @@ public class CompanyNegotiate implements Entity {
 	@JoinColumn(name="sq_prod", referencedColumnName="sq_prod")
 	private Product product;
 
-	@Column(name="value", nullable=true)
+	/**
+	 * Proposed value.
+	 */
+	@Column(name="value", nullable=true, precision=2, length=12)
 	private Double value;
 	
 	@Column(name="in_actv", nullable=false)
 	private Boolean active;
+	
+	@Version
+	@Column(name="nu_vers", nullable=false)
+	private Integer version;
 	
 	/**
 	 * Default constructor
@@ -74,6 +96,20 @@ public class CompanyNegotiate implements Entity {
 	}
 
 	/**
+	 * @return the company
+	 */
+	public Company getCompany() {
+		return company;
+	}
+
+	/**
+	 * @param company the company to set
+	 */
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	/**
 	 * @return the brand
 	 */
 	public Brand getBrand() {
@@ -85,6 +121,20 @@ public class CompanyNegotiate implements Entity {
 	 */
 	public void setBrand(Brand brand) {
 		this.brand = brand;
+	}
+
+	/**
+	 * @return the model
+	 */
+	public Model getModel() {
+		return model;
+	}
+
+	/**
+	 * @param model the model to set
+	 */
+	public void setModel(Model model) {
+		this.model = model;
 	}
 
 	/**
@@ -129,6 +179,20 @@ public class CompanyNegotiate implements Entity {
 		this.active = active;
 	}
 
+	/**
+	 * @return the version
+	 */
+	public Integer getVersion() {
+		return version;
+	}
+
+	/**
+	 * @param version the version to set
+	 */
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -165,9 +229,9 @@ public class CompanyNegotiate implements Entity {
 	 */
     @Override
     public String toString() {
-	    return "CompanyNegotiate [id=" + id + ", brand=" + brand
-	            + ", product=" + product
-	            + ", value=" + value + ", active=" + active + "]";
+	    return "CompanyNegotiate [id=" + id + ", brand=" + brand + ", model="
+	            + model + ", product=" + product + ", value=" + value
+	            + ", active=" + active + "]";
     }
 
 }
