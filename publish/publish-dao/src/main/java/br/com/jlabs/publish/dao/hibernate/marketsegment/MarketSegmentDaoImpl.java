@@ -12,7 +12,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import br.com.jlabs.publish.dao.AbstractHibernateDao;
+import br.com.jlabs.publish.dao.hibernate.CrudDaoImpl;
 import br.com.jlabs.publish.dao.marketsegment.MarketSegmentDao;
 import br.com.jlabs.publish.entity.MarketSegment;
 
@@ -21,15 +21,7 @@ import br.com.jlabs.publish.entity.MarketSegment;
  *
  */
 @Repository("marketSegmentDao")
-public class MarketSegmentDaoImpl extends AbstractHibernateDao<MarketSegment> implements
-        MarketSegmentDao {
-
-	/**
-	 * Default constructor.
-	 */
-	public MarketSegmentDaoImpl() {
-	    super(MarketSegment.class);
-    }
+public class MarketSegmentDaoImpl extends CrudDaoImpl implements MarketSegmentDao {
 	
 	/**
 	 * Search Market segment by name

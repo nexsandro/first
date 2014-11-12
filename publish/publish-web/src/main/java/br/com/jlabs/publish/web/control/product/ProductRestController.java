@@ -23,7 +23,7 @@ public class ProductRestController {
 	@RequestMapping(value="/products", method=RequestMethod.GET)
 	public @ResponseBody List<Product> search() {
 		
-		return productBusiness.list();
+		return productBusiness.findAll();
 		
 	}
 	
@@ -52,7 +52,7 @@ public class ProductRestController {
 	@RequestMapping(value="/product/{id}", method=RequestMethod.GET)
 	public @ResponseBody Product get(@PathVariable Long id) {
 
-		return productBusiness.findOne(id, new String[] {"brand", "manufacturer"});
+		return productBusiness.findOne("id", id, new String[] {"brand", "manufacturer"});
 		
 	}	
 }

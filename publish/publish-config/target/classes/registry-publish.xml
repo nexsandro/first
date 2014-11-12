@@ -4,6 +4,7 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
@@ -18,7 +19,9 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 	
 	<description>Publish Spring context</description>
 
@@ -32,9 +35,34 @@
 	<context:component-scan 
 		base-package="br.com.jlabs.publish" />
 
+	<!-- Enable Spring security using annotations -->
+	<security:global-method-security secured-annotations="enabled" />
+
 	<!-- The datasource obtained from container -->
 	<jee:jndi-lookup id="pubDataSource" jndi-name="java:comp/env/jdbc/DefaultDS"/>
 
+	<!-- Configure authorization restrictions -->
+	<security:http auto-config="true">
+        <!-- Restrict URLs based on role -->
+        <security:intercept-url pattern="/login/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
+        <security:intercept-url pattern="/**" access="ROLE_USER" />
+
+        <!-- Override default login and logout pages -->
+        <security:form-login login-page="/login/login.jsp"
+                             default-target-url="/control/rest" 
+                             login-processing-url="/control/j_spring_security_check"
+                             authentication-failure-url="/login/login.jsp?error=true" />
+    </security:http>
+
+    <security:authentication-manager>
+	    <security:authentication-provider>
+	      <security:user-service>
+	        <security:user name="sandro" password="x" authorities="ROLE_USER, ROLE_ADMIN" />
+	      </security:user-service>
+	    </security:authentication-provider>
+    </security:authentication-manager>
+    
 	<!-- Transactional wrapper around datasource -->
 	<bean id="txDataSource" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
 	     <constructor-arg ref="pubDataSource"/>
@@ -101,5 +129,7 @@
 		<!-- one of the properties available; the maximum file size in bytes, 100MB-->
 		<property name="maxUploadSize" value="${client.maxUploadSize}" /> 
 	</bean>
+	
+	
 
 </beans>

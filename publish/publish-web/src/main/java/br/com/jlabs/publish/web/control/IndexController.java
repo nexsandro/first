@@ -21,7 +21,7 @@ public class IndexController {
 	public ModelAndView doIt(HttpServletRequest req, HttpServletResponse resp) {
 		
 		ModelAndView modelAndView = new ModelAndView("index");
-		modelAndView.addObject("companies", companyBusiness.list());
+		modelAndView.addObject("companies", companyBusiness.findAll());
 		
 		return modelAndView;
 	}

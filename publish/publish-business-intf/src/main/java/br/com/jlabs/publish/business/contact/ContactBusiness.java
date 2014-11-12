@@ -1,11 +1,11 @@
 package br.com.jlabs.publish.business.contact;
 
-import java.io.Serializable;
 import java.util.List;
 
+import br.com.jlabs.publish.business.CrudBusiness;
 import br.com.jlabs.publish.entity.Contact;
 
-public interface ContactBusiness {
+public interface ContactBusiness extends CrudBusiness<Contact> {
 
 	/**
 	 * List all the contacts of the refered company
@@ -14,10 +14,6 @@ public interface ContactBusiness {
 	 */
 	List<Contact> list(Long companyId);
 	
-	Contact findOne(Serializable key, String ... joinFetch);
-
 	void save(Contact company);
 
-	void delete(Long id);
-	
 }

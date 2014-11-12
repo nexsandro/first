@@ -22,7 +22,7 @@ public class CompanyController {
 	@RequestMapping("/list")
 	public ModelAndView list() {
 		
-		List<Company> companies = companyBusiness.list();
+		List<Company> companies = companyBusiness.findAll();
 		ModelAndView modelAndView = new ModelAndView("/company/list");
 		modelAndView.addObject("companies", companies);
 		return modelAndView;

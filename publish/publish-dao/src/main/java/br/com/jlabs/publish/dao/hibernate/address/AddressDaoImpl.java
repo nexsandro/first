@@ -5,22 +5,14 @@ package br.com.jlabs.publish.dao.hibernate.address;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.jlabs.publish.dao.AbstractHibernateDao;
 import br.com.jlabs.publish.dao.address.AddressDao;
-import br.com.jlabs.publish.entity.Address;
+import br.com.jlabs.publish.dao.hibernate.CrudDaoImpl;
 
 /**
  * @author sandro
  *
  */
 @Repository("addressDao")
-public class AddressDaoImpl extends AbstractHibernateDao<Address> implements AddressDao {
-
-	/**
-	 * Default constructor
-	 */
-	public AddressDaoImpl() {
-	    super(Address.class);
-    }
+public class AddressDaoImpl extends CrudDaoImpl implements AddressDao {
 
 }

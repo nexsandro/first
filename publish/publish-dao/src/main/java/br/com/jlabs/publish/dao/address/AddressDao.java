@@ -1,9 +1,8 @@
 package br.com.jlabs.publish.dao.address;
 
-import br.com.jlabs.publish.dao.IGenericDao;
-import br.com.jlabs.publish.entity.Address;
+import br.com.jlabs.publish.dao.CrudDao;
 
-public interface AddressDao extends IGenericDao<Address> {
+public interface AddressDao extends CrudDao {
 
 	
 }

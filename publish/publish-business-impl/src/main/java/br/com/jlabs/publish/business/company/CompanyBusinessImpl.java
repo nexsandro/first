@@ -8,84 +8,48 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.jlabs.publish.business.AbstractCrudBusiness;
 import br.com.jlabs.publish.business.UserException;
-import br.com.jlabs.publish.dao.address.AddressDao;
 import br.com.jlabs.publish.dao.company.CompanyDao;
-import br.com.jlabs.publish.dao.marketsegment.MarketSegmentDao;
 import br.com.jlabs.publish.entity.Company;
 import br.com.jlabs.publish.entity.CompanyNegotiate;
 import br.com.jlabs.publish.entity.MarketSegment;
 import br.com.jlabs.publish.search.company.CompanySearchFilter;
 
 @Service("companyBusiness")
-public class CompanyBusinessImpl implements CompanyBusiness {
+public class CompanyBusinessImpl extends AbstractCrudBusiness<Company> implements CompanyBusiness {
 
 	@Autowired
 	private CompanyDao companyDao;
-
-	@Autowired
-	private AddressDao addressDao;
-
-	@Autowired
-	private MarketSegmentDao marketSegmentDao;
 	
-	
-	@Transactional(propagation=Propagation.REQUIRED)
-	public List<Company> list() {
+	/**
+	 * Default constructor.
+	 */
+	public CompanyBusinessImpl() {
+	    super(Company.class);
+    }
 
-		return companyDao.findAll();
-	}
-	
 	@Transactional(propagation=Propagation.REQUIRED)
 	public Company save(Company company) throws UserException {
 
 		// Adjust address
 		if (company.getAddress() != null) {
 			if (company.getAddress().getId() != null) {
-				company.setAddress(addressDao.update(company.getAddress()));
+				company.setAddress(getCrudDao().update(company.getAddress()));
 			} else {
-				addressDao.create(company.getAddress());
+				getCrudDao().create(company.getAddress());
 			}
 		}
 		
 		if (company.getId() != null) {
-			companyDao.update(company);
+			update(company);
 		} else {
-			companyDao.create(company);
+			create(company);
 		}
 		
 		return company;
 	}
 
-	/**
-	 * @param companyDao the companyDao to set
-	 */
-	public void setCompanyDao(CompanyDao companyDao) {
-		this.companyDao = companyDao;
-	}
-
-	/**
-	 * @return the addressDao
-	 */
-	public AddressDao getAddressDao() {
-		return addressDao;
-	}
-
-	/**
-	 * @param addressDao the addressDao to set
-	 */
-	public void setAddressDao(AddressDao addressDao) {
-		this.addressDao = addressDao;
-	}
-
-	/**
-	 * Retrieve company by id.
-	 */
-	@Transactional(propagation=Propagation.REQUIRED)
-	public Company findOne(Serializable key, String ... joinFetch) {
-		return companyDao.findOne("id", key, joinFetch);
-	}
-	
 	/**
 	 * Search for text.
 	 */
@@ -95,17 +59,6 @@ public class CompanyBusinessImpl implements CompanyBusiness {
 	}
 
 	/**
-	 * Delete the company identified by id.
-	 */
-	@Transactional(propagation=Propagation.REQUIRED)
-	public void delete(Long id) {
-
-		Company company = companyDao.load(id);
-	    
-		companyDao.delete(company);
-    }
-
-	/**
 	 * Add the market segment to the company collection.
 	 */
 	@Transactional(propagation=Propagation.REQUIRED)
@@ -113,15 +66,15 @@ public class CompanyBusinessImpl implements CompanyBusiness {
 	    
 		// Add if not exist market segment
 		if (marketSegment.getId() == null) {
-			marketSegmentDao.create(marketSegment);
+			getCrudDao().create(marketSegment);
 		} else {
-			marketSegment = marketSegmentDao.load(marketSegment.getId());
+			marketSegment = getCrudDao().load(MarketSegment.class, marketSegment.getId());
 		}
 	    
 		// Associate to the company, must exist.
-		company = companyDao.load(company.getId());
+		company = load(company.getId());
 		company.getMarketSegments().add(marketSegment);
-		companyDao.update(company);
+		getCrudDao().update(company);
 		
     }
 
@@ -131,8 +84,8 @@ public class CompanyBusinessImpl implements CompanyBusiness {
 	@Transactional(propagation=Propagation.REQUIRED)
 	public void removeMarketSegment(Serializable companyId, Serializable marketSegmentId) {
 	    
-		Company company = companyDao.load(companyId);
-	    MarketSegment marketSegment = marketSegmentDao.load(marketSegmentId);
+		Company company = load(companyId);
+	    MarketSegment marketSegment = getCrudDao().load(MarketSegment.class, marketSegmentId);
 	    
 		company.getMarketSegments().remove(marketSegment);
 		

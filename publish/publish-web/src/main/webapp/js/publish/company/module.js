@@ -158,7 +158,7 @@
 		/*
 		 * Editar produtos negociados
 		 */
-		this.editNegotiationss = function() {
+		this.editNegotiations = function() {
 
 			$location.path('/company/' + localContext.company.id + '/negotiations');
 			

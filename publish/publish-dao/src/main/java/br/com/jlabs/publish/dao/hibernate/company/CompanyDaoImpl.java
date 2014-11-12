@@ -10,25 +10,15 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import br.com.jlabs.publish.dao.AbstractHibernateDao;
 import br.com.jlabs.publish.dao.company.CompanyDao;
+import br.com.jlabs.publish.dao.hibernate.CrudDaoImpl;
 import br.com.jlabs.publish.entity.Company;
 import br.com.jlabs.publish.entity.CompanyNegotiate;
 import br.com.jlabs.publish.search.company.CompanySearchFilter;
 
 @Repository("companyDao")
-public class CompanyDaoImpl extends AbstractHibernateDao<Company> implements CompanyDao {
+public class CompanyDaoImpl extends CrudDaoImpl implements CompanyDao {
 
-	public CompanyDaoImpl() {
-		super(Company.class);
-	}
-	
-	public List<Company> list() {
-		Session session = sessionFactory.getCurrentSession();
-		Criteria crit = session.createCriteria(Company.class);
-		
-		return crit.list();
-	}
 
 	public List<CompanyNegotiate> listNegotiations(Serializable companyId) {
 		

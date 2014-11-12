@@ -30,7 +30,7 @@ public class ContactRestController {
 	@RequestMapping(value="/contact/{id}", method=RequestMethod.GET)
 	public @ResponseBody Contact get(@PathVariable Long id) {
 
-		return contactBusiness.findOne(id, "company");
+		return contactBusiness.findOne("id", id, "company");
 		
 	}
 	

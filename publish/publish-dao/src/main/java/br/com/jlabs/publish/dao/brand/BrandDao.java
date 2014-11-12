@@ -1,8 +1,7 @@
 package br.com.jlabs.publish.dao.brand;
 
-import br.com.jlabs.publish.dao.IGenericDao;
-import br.com.jlabs.publish.entity.Brand;
+import br.com.jlabs.publish.dao.CrudDao;
 
-public interface BrandDao extends IGenericDao<Brand> {
+public interface BrandDao extends CrudDao {
 
 }

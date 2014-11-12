@@ -10,8 +10,8 @@ import org.hibernate.classic.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import br.com.jlabs.publish.dao.AbstractHibernateDao;
 import br.com.jlabs.publish.dao.contact.ContactDao;
+import br.com.jlabs.publish.dao.hibernate.CrudDaoImpl;
 import br.com.jlabs.publish.entity.Contact;
 
 /**
@@ -19,14 +19,7 @@ import br.com.jlabs.publish.entity.Contact;
  *
  */
 @Repository("contactDao")
-public class ContactDaoImpl extends AbstractHibernateDao<Contact> implements ContactDao {
-
-	/**
-	 * Default constructor
-	 */
-	public ContactDaoImpl() {
-	    super(Contact.class);
-    }
+public class ContactDaoImpl extends CrudDaoImpl implements ContactDao {
 
 	public List<Contact> list(Long companyId) {
 		Session session = sessionFactory.getCurrentSession();

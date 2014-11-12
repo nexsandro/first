@@ -23,14 +23,14 @@ public class BrandRestController {
 	@RequestMapping(value="/brands", method=RequestMethod.GET)
 	public @ResponseBody List<Brand> search() {
 		
-		return brandBusiness.list();
+		return brandBusiness.findAll();
 		
 	}
 
 	@RequestMapping(value="/brands", method=RequestMethod.POST)
 	public @ResponseBody Brand save(@RequestBody Brand brand) {
 		
-		brandBusiness.save(brand);
+		brandBusiness.update(brand);
 		
 		return brand;
 		

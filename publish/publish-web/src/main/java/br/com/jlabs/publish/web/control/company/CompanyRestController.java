@@ -44,7 +44,7 @@ public class CompanyRestController {
 	@RequestMapping(value="/companies", method=RequestMethod.GET)
 	public @ResponseBody List<Company> search() {
 		
-		return companyBusiness.list();
+		return companyBusiness.findAll();
 		
 	}
 	
@@ -67,7 +67,7 @@ public class CompanyRestController {
 	@RequestMapping(value="/company/{id}", method=RequestMethod.GET)
 	public @ResponseBody Company get(@PathVariable Long id) {
 
-		return companyBusiness.findOne(id, "address");
+		return companyBusiness.findOne("id", id, "address");
 		
 	}
 	

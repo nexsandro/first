@@ -40,7 +40,7 @@ public class MarketSegmentRestController {
 	@RequestMapping(value="/company/{companyId}/marketSegments", method=RequestMethod.GET)
 	public @ResponseBody Set<MarketSegment> list(@PathVariable("companyId") Long companyId) {
 		
-		return companyBusiness.findOne(companyId, "marketSegments").getMarketSegments();
+		return companyBusiness.findOne("id", companyId, "marketSegments").getMarketSegments();
 	}
 
 	@RequestMapping(value="/marketSegment/{marketSegmentId}", method=RequestMethod.GET)

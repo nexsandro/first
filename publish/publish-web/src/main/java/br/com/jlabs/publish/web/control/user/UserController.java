@@ -22,7 +22,7 @@ public class UserController {
 	@RequestMapping("/list")
 	public ModelAndView list() {
 		
-		List<User> users = userBusiness.list();
+		List<User> users = userBusiness.findAll();
 		ModelAndView modelAndView = new ModelAndView("/user/list");
 		modelAndView.addObject("users", users);
 		return modelAndView;
@@ -32,7 +32,7 @@ public class UserController {
 	public ModelAndView edit(User user, BindingResult bindingResult) {
 		
 		if (user.getId() != null)
-			user = userBusiness.getUserById(user.getId());
+			user = userBusiness.findOne(user.getId());
 		
 		ModelAndView modelAndView = new ModelAndView("/user/edit");
 		modelAndView.addObject("user", user);
